@@ -1,0 +1,24 @@
+
+
+<mat-toolbar color="primary">
+  <span>Helpdesk</span>
+  <button mat-stroked-button>Click Me!</button>
+  <button mat-stroked-button>Dashboard</button>
+  <button mat-button color='warn'><mat-icon>chat</mat-icon>Support</button>
+  <button mat-raised-button [matMenuTriggerFor]='donateBy'>Donate</button>
+
+  <span class="toolbar-spacer"></span>
+  <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
+</mat-toolbar>
+
+<mat-menu #donateBy='matMenu'>
+  <button mat-menu-item>
+    <mat-icon>free_breakfast</mat-icon>Buy Me Breakfast!
+  </button>
+  <button mat-menu-item>
+    <mat-icon>casino</mat-icon>21!
+  </button>
+  <button mat-menu-item>
+    <mat-icon>hot_tub</mat-icon>Spa Vacation!
+  </button>
+</mat-menu>

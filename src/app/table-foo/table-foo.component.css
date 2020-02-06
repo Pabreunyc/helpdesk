@@ -1,0 +1,27 @@
+.table-full-width {
+  width: 100%;
+}
+
+.table-full-width td {
+  border:1px dashed rgba(255,0,0,.75);
+  background-color: yellow;
+}
+.table-bordered {
+  border:1px solid blue!important;
+}
+
+
+.mat-header-cell {
+  font-size:1.5em;
+  font-weight: bolder;
+}
+
+.table-striped tr.mat-row:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-hover tr.mat-row:hover {
+  color: #212529;
+  background-color: rgba(255, 255, 0, 0.075);
+  cursor: pointer;
+}
