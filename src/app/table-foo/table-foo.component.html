@@ -1,46 +1,52 @@
-<section style='margin-top:1em;'>
+<section style='' id='messageListComponent'>
 
-<table class="table-full-width table-striped table-hover table-bordered" aria-label="Control">
-    <tr>
-      <td>Some Stuff, some stuff</td>
-      <td><mat-icon>question_answer</mat-icon></td>
-    </tr>
-</table>
 <div class="mat-elevation-z8">
-  <mat-paginator #paginator
-    [length]="dataSource.data.length"
-    [pageIndex]="0"
-    [pageSize]="5"
-    [pageSizeOptions]="[5, 10, 25, 250]">
-  </mat-paginator>
 
-  <table mat-table class="table-full-width table-striped table-hover table-bordered" matSort aria-label="Elements" id='list-messages'>
-    <ng-container matColumnDef='xx'>
-      <th mat-header-cell *matHeaderCellDef>
-        <select><option>1</option></select>
-        <select><option>1</option></select>
-      </th>
-      <td mat-cell *matCellDef></td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource" class='mat-table' id='list-messages'>
 
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let row">{{row.id}}</td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let row">{{row.name}}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row
-      *matRowDef="let row; columns: displayedColumns;"
-      (click)='tableRowClick(row)'></tr>
-  </table>
+        <ng-container matColumnDef='id'>
+            <th mat-header-cell *matHeaderCellDef>id</th>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef='from'>
+            <th mat-header-cell *matHeaderCellDef style='width:12em'>From</th>
+            <td mat-cell *matCellDef="let row">
+                {{row.from}}<br /><span class='small' style='padding-left:1em'>- {{row.title}}</span>
+            </td>
+        </ng-container>
+    
+        <ng-container matColumnDef='subject'>
+            <th mat-header-cell *matHeaderCellDef>-Subject-</th>
+            <td mat-cell *matCellDef="let row">
+                <strong>{{row.subject}}</strong><br />
+                <span style='padding-left:1em'>- {{row.description}}</span>
+        </ng-container>
+    
+        <ng-container matColumnDef='category'>
+            <th mat-header-cell *matHeaderCellDef> --- </th>
+            <td mat-cell *matCellDef="let row">
+                {{row.category}}<br />{{row.priority}}
+                </td>
+        </ng-container>
+    
+        <ng-container matColumnDef='date'>
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let row">{{row.date}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef='actions'>
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let row"><mat-icon>phone</mat-icon></td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef='displayedColumns'></tr>
+        <tr mat-row 
+            *matRowDef="let row; columns: displayedColumns;"
+            (click)='tableRowClick(row)'>
+        </tr>
+    
+    </table>
 
 </div>
-
 </section>

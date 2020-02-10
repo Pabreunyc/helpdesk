@@ -5,49 +5,39 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface TableFooItem {
-  name: string;
   id: number;
+  from: string,
+  title: string,
+  subject: string;
+  description: string,
+  category: string;
+  priority: string,
+  date:string
 }
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: TableFooItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
+const TICKETS:TableFooItem[] = [
+  {id:100, from:'Fred Smith', title:'Landscape Architect', subject:'Having a problem displaying', description:'Something something eomsehting something else', category:'network', priority:'standard', date:'2-12-2020 12:12AM'},
+  {id:101, from: 'James Quigley', title:'Planner', subject:'Display Probs', description:'Somthing went wrong with something or something did something', category:'video', priority:'important', date:'2-12-2020 13:12AM'},
+  {id:102, from:'Mike Holmes', title:'contractor', subject:'Waterheater overheating', description:'He a was repairing a leaking bonus room above a garage, that of course was not done right in the first place, and he was on a ladder wiring a new receptacle for a garage door opener', category:'hardware', priority:'urgent', date:'2-12-2020 14:12AM'},
+  {id:103, from: 'Fred SMith', title:'Lanscape Architect', subject:'NYC1 Network Mainenance', description:'During the above window, the networking team...', category:'network' ,priority:'low', date:'2-15-2020 12:12AM'}
 ];
-
 /**
  * Data source for the TableFoo view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
 export class TableFooDataSource extends DataSource<TableFooItem> {
-  data: TableFooItem[] = EXAMPLE_DATA;
+  data: TableFooItem[] = TICKETS;
   paginator: MatPaginator;
-  sort: MatSort;
 
   /* constructor(private paginator: MatPaginator, private sort: MatSort) {
     super();
   }*/
   constructor() {
     super();
+    let d = this.data;
+    let id = 104;
     console.log('TableFooDataSource:', this.data);
   }
 
@@ -60,20 +50,12 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
-      observableOf(this.data),
-      this.paginator.page,
-      this.sort.sortChange
+      observableOf(this.data)
     ];
-
-    // Set the paginator's length
-    this.paginator.length = this.data.length;
 
     return merge(...dataMutations)
       .pipe(
-        tap(val => console.log('tap:', val)),
-        map(() => {
-          return this.getPagedData(this.getSortedData([...this.data]));
-        })
+        tap(val => console.log('tap:', val))
       );
   }
 
@@ -84,35 +66,7 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
   disconnect() {
     console.log('TableFooDataSources.disconnect');
   }
-
-  /**
-   * Paginate the data (client-side). If you're using server-side pagination,
-   * this would be replaced by requesting the appropriate data from the server.
-   */
-  private getPagedData(data: TableFooItem[]) {
-    const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-    return data.splice(startIndex, this.paginator.pageSize);
-  }
-
-  /**
-   * Sort the data (client-side). If you're using server-side sorting,
-   * this would be replaced by requesting the appropriate data from the server.
-   */
-  private getSortedData(data: TableFooItem[]) {
-    console.log(']]]', this.sort.active, this.sort.direction);
-    if (!this.sort.active || this.sort.direction === '') {
-      return data;
-    }
-
-    return data.sort((a, b) => {
-      const isAsc = this.sort.direction === 'asc';
-      switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
-        default: return 0;
-      }
-    });
-  }
+  
 }
 
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
