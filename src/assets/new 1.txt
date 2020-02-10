@@ -1,0 +1,34 @@
+[
+{
+	'id': 100,
+	'name': 'Sue Storm',
+	'email': 'sstorm@ff.org',
+	'title':'invisible girl',
+	'phone':'212-444-4444'
+},
+{	
+	'id': 200,
+	'name': 'Johhny Storm',
+	'email': 'jstorm@ff.org',
+	'title':'the torch
+	'phone':'212-444-4445'
+},
+	'id: 300,
+	'name': 'Reed Richards',
+	'email': 'reed@ff.org',
+	'title':'mr. fantastic',
+	'phone':'212-444-4444'
+},
+	'id': 400,
+	'name': 'Ben Grimm',
+	'email': 'bgrimm@ff.org',
+	'title':'the thing',
+	'phone':'212-555-4444'
+},
+	'id': 600,
+	'name': 'Jennifer Walters'
+	'email': 'jen@hulksinc.com'
+	'title':'she-hulk',
+	'phone':'718-123-7788'
+}
+]
