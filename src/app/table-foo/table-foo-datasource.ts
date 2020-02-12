@@ -2,6 +2,9 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map, tap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
+import  messageList  from '../../assets/data/messagelist.json';
 
 // TODO: Replace this with your own data model type
 export interface TableFooItem {
@@ -28,7 +31,7 @@ const TICKETS:TableFooItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class TableFooDataSource extends DataSource<TableFooItem> {
-  data: TableFooItem[] = TICKETS;
+  data:TableFooItem[];
   paginator: MatPaginator;
 
   /* constructor(private paginator: MatPaginator, private sort: MatSort) {
@@ -36,8 +39,7 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
   }*/
   constructor() {
     super();
-    let d = this.data;
-    let id = 104;
+    this.data = messageList;
     console.log('TableFooDataSource:', this.data);
   }
 
@@ -47,6 +49,7 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
    * @returns A stream of the items to be rendered.
    */
   connect(): Observable<TableFooItem[]> {
+    console.log('TableFooDataSources.Connect');
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -55,7 +58,6 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
 
     return merge(...dataMutations)
       .pipe(
-        tap(val => console.log('tap:', val))
       );
   }
 

@@ -3,9 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
+import { FormsModule } from '@angular/forms';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatDialogModule } from '@angular/material';
 import { MatPaginatorModule, MatProgressSpinnerModule, MatSortModule, MatTableModule } from '@angular/material';
 import { MatGridListModule, MatCardModule, MatMenuModule } from '@angular/material';
 
@@ -19,6 +22,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MlistComponent } from './mlist/mlist.component';
 import { HeaderComponent } from './_shared/header.component';
 import { TableFooComponent } from './table-foo/table-foo.component';
+import { TestingComponent } from './testing/testing.component';
+import { TestDialogComponent } from './testing/test-dialog/test-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -29,12 +35,16 @@ import { TableFooComponent } from './table-foo/table-foo.component';
     MlistComponent,
     HeaderComponent,
     HomeComponent,
-    TableFooComponent
+    TableFooComponent,
+    TestingComponent,
+    TestDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatSidenavModule,
+    FormsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -47,9 +57,11 @@ import { TableFooComponent } from './table-foo/table-foo.component';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
+    MatDialogModule,
     AppRoutingModule
   ],
   providers: [],
+  entryComponents: [TestDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

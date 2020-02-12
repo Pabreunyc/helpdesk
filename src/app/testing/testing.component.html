@@ -1,0 +1,31 @@
+<section class='container'>
+  <h2>Welcome to the Skunkworks!</h2>
+  
+  <form name='projectForm' (ngSubmit)="getProject()">
+    <input type='text'
+      placeholder="Enter Project Name"
+      name="dataProject"
+      [(ngModel)]="data.project">
+  </form>
+
+</section>
+
+<section class='container'>
+  <button mat-raised-button
+    fxFlex class='item'
+    id="id_btnEstablish1"
+    color='accent'
+    (click)="establishDialog(1)">Establish Dialog</button>
+
+  <button mat-raised-button 
+    fxFlex class='item'
+    id="id_btnEstablish2"
+    color='warn'
+    (click)="endDialog(2)">End Dialog</button>
+
+  <button mat-raised-button 
+    fxFlex class='item'
+    id="id_btnEstablish3"
+    color='primary'
+    (click)="killAllDialog(3)">Kill Them All!</button>
+</section>

@@ -12,7 +12,7 @@
         <ng-container matColumnDef='from'>
             <th mat-header-cell *matHeaderCellDef style='width:12em'>From</th>
             <td mat-cell *matCellDef="let row">
-                {{row.from}}<br /><span class='small' style='padding-left:1em'>- {{row.title}}</span>
+              <mat-icon style="font-size:14px!important">mail</mat-icon>{{row.from}}<br /><span class='small' style='padding-left:1em'>- {{row.title}}</span>
             </td>
         </ng-container>
     

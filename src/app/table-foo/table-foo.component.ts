@@ -22,8 +22,6 @@ export class TableFooComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.dataSource = new TableFooDataSource();
-
-
   }
 
   ngAfterViewInit() {
