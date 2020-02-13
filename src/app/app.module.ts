@@ -6,6 +6,12 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+
+import {TableModule} from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatDialogModule } from '@angular/material';
@@ -45,6 +51,7 @@ import { TestDialogComponent } from './testing/test-dialog/test-dialog.component
     FlexLayoutModule,
     MatSidenavModule,
     FormsModule,
+    MatInputModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -58,7 +65,11 @@ import { TestDialogComponent } from './testing/test-dialog/test-dialog.component
     MatCardModule,
     MatMenuModule,
     MatDialogModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TableModule,
+    InputTextModule,
+    CardModule,
+    ButtonModule
   ],
   providers: [],
   entryComponents: [TestDialogComponent],

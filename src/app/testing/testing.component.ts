@@ -30,10 +30,6 @@ data = {
   establishDialog(self) {
     console.log('establishDialog.click', this);
     const diagRef = this.dialog.open(TestDialogComponent, {
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      height: '100%',
-      width: '100%',
       data: this.data.project || 'TEST DATA'
     });
 

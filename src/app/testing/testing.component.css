@@ -1,0 +1,8 @@
+.boxy:nth-child(odd) {
+    background-color: lightblue;
+    width:98%;
+}
+.boxy:nth-child(even) {
+    background-color: lightseagreen;
+    width:98%;
+}

@@ -6,12 +6,14 @@ import { HomeComponent } from './home/home.component';
 import { TableFooComponent } from './table-foo/table-foo.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestingComponent } from './testing/testing.component';
+import { MessagesListComponent } from './messages-list/messages-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'table', component: TableFooComponent },
   { path: 'foo', component: DashboardComponent },
   { path: 'testing', component: TestingComponent},
+  { path: 'messages', component: MessagesListComponent }
 ];
 
 @ NgModule({

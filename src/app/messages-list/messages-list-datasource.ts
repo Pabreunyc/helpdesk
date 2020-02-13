@@ -1,6 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
-import { map } from 'rxjs/operators';
+import { map,tap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
@@ -43,7 +43,7 @@ export class MessagesListDataSource extends DataSource<MessagesListItem> {
 
   constructor(private paginator: MatPaginator, private sort: MatSort) {
     super();
-    console.log('>>>.construct', this.data);
+    console.log('MessagesListDataSource.construct', this.data);
   }
 
   /**
@@ -56,24 +56,26 @@ export class MessagesListDataSource extends DataSource<MessagesListItem> {
     // stream for the data-table to consume.
     const dataMutations = [
       observableOf(this.data),
-      this.paginator.page,
-      this.sort.sortChange
     ];
+    console.log('MessagesListDataSource.connect', this.data);
 
-    console.log('>>>.connect', this.data);
-    // Set the paginator's length
-    this.paginator.length = this.data.length;
 
+    return observableOf(this.data);
+
+    /*
     return merge(...dataMutations).pipe(map(() => {
       return this.getPagedData(this.getSortedData([...this.data]));
     }));
+    */
   }
 
   /**
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() {
+    console.log('MessagesListDataSource.disconnect');
+  }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
