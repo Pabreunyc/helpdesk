@@ -59,9 +59,7 @@ export class MessagesListDataSource extends DataSource<MessagesListItem> {
     ];
     console.log('MessagesListDataSource.connect', this.data);
 
-
-    return observableOf(this.data);
-
+    return merge(...dataMutations).pipe();
     /*
     return merge(...dataMutations).pipe(map(() => {
       return this.getPagedData(this.getSortedData([...this.data]));
