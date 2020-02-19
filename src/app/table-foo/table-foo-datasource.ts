@@ -40,7 +40,7 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
   constructor() {
     super();
     this.data = messageList;
-    console.log('TableFooDataSource:', this.data);
+    console.log('TableFooDataSource.constructor:');
   }
 
   /**
@@ -68,7 +68,7 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
   disconnect() {
     console.log('TableFooDataSources.disconnect');
   }
-  
+
 }
 
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */

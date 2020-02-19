@@ -20,7 +20,6 @@ data = {
   }
 
   ngOnInit() {
-    
   }
 
   getProject(d) {

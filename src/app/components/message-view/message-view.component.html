@@ -1,0 +1,70 @@
+<section fxLayout='row' fxLayoutAlign='space-evenly' fxLayoutGap="12px">
+  <div fxFlex class="mat-elevation-z2">
+    <p-panel header='{{user.name}} ({{user.email}})'>
+      <form ngForm=#userInfo>
+        <div fxLayout fxLayoutAlign='space-evenly' fxLayoutGap='8px'>
+          <input type='text' name='title' placeholder="Title" [(ngModel)]='user.title' pInputText>
+          <input type='text' name='dept' placeholder="Department" [(ngModel)]='user.dept' pInputText><br />
+
+        </div>
+        <div fxLayout fxLayoutAlign='space-evenly' fxLayoutGap='8px' style='margin-top:8px'>
+          <input fxFlex='100%' type='text' name='phone' placeholder="Phone" [(ngModel)]='user.phone' pInputText>
+        </div>
+      </form>
+    </p-panel>
+    <br />
+    <p-panel header='Ticket Info'>
+      <p>Info!</p>
+    </p-panel>
+  </div>
+
+  <div fxFlex class="mat-elevation-z2">
+    <p-panel header='New Message'>
+      <form>
+        <div class='ui-inputgroup'>
+          <span class='ui-inputgroup-addon'><mat-icon>subject</mat-icon></span>
+          <input type="text" size="30" placeholder='Subject' pInputText>
+        </div>
+
+        <textarea pInputTextarea placeholder="Describe Problem" rows='10' style='width:100%'></textarea>
+        <hr />
+
+
+        <p-fileUpload mode="basic" name="demo[]"
+          chooseLabel="Browse"
+          uploadLabel='Upload'
+          showUploadButton='true'
+          accept="image/*"
+          maxFileSize="1000000"
+          customUpload='true'
+          (onBeforeSend)="onBeforeSend($event)"
+          (onUpload)="onBasicUpload($event)"
+          (onSelect)="onBasicSelect($event)"
+          (uploadHandler)="onBasicUploading($event)">
+            <ng-template pTemplate="toolbar">
+                <div>Upload 3 Files</div>
+            </ng-template>
+            <ng-template let-file pTemplate="file">
+                <div>Custom UI to display a file</div>
+            </ng-template>
+            <ng-template pTemplate="content">
+                <div>Custom UI to manage uploaded files</div>
+            </ng-template>
+        </p-fileUpload>
+
+        <div class='ui-inputgroup'>
+            <span class='ui-inputgroup-addon'>Attachment(s)&nbsp;</span>
+          <select>
+            <option>Attachment 1</option><option>Attachment 2</option><option>Attachment 3</option>
+          </select>
+          <span class='ui-inputgroup-addon'><mat-icon>delete_forever</mat-icon></span>
+        </div>
+
+        <div fxLayout='row' fxLayoutAlign='end'>
+          <button pButton type='button' class="ui-button-secondary" label='Cancel'></button> &nbsp;
+          <button pButton type="button" label="Success" class="ui-button-success" (click)="submitTicket($event)"></button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+</section>

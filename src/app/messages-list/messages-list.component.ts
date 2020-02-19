@@ -1,23 +1,26 @@
 import { OnInit, AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MessagesListDataSource, MessagesListItem } from './messages-list-datasource';
+import { MessagesListDataSource } from './messages-list-datasource';
+import { MessagesListItem } from './messages-list-datasource';
 
 @Component({
   selector: 'app-messages-list',
   templateUrl: './messages-list.component.html',
-  styleUrls: ['./messages-list.component.css']
+  styleUrls: ['./messages-list.component.css'],
+  providers: [MessagesListDataSource]
 })
 export class MessagesListComponent implements OnInit, AfterViewInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name'];
   elements: MessagesListItem[];
 
-  constructor(private messageSource:MessagesListDataSource) {
+  constructor(private messageSource: MessagesListDataSource) {
+    console.log('...');
     console.log(messageSource);
   }
 
   ngOnInit() {
     console.log('MessagesListComponent.OnInit');
-    console.log(MessagesListDataSource);
+    this.elements = this.messageSource.data;
   }
 
   ngAfterViewInit() {

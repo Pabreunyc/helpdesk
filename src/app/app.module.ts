@@ -1,17 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
 import {TableModule} from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputMaskModule } from 'primeng/inputmask';
+import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 import { CardModule } from 'primeng/card';
+import { PanelModule} from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatDialogModule } from '@angular/material';
@@ -30,6 +37,7 @@ import { HeaderComponent } from './_shared/header.component';
 import { TableFooComponent } from './table-foo/table-foo.component';
 import { TestingComponent } from './testing/testing.component';
 import { TestDialogComponent } from './testing/test-dialog/test-dialog.component';
+import { MessageViewComponent } from './components/message-view/message-view.component';
 
 
 @NgModule({
@@ -43,11 +51,13 @@ import { TestDialogComponent } from './testing/test-dialog/test-dialog.component
     HomeComponent,
     TableFooComponent,
     TestingComponent,
-    TestDialogComponent
+    TestDialogComponent,
+    MessageViewComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     FlexLayoutModule,
     MatSidenavModule,
     FormsModule,
@@ -68,8 +78,15 @@ import { TestDialogComponent } from './testing/test-dialog/test-dialog.component
     AppRoutingModule,
     TableModule,
     InputTextModule,
+    InputTextareaModule,
+    InputMaskModule,
+    DropdownModule,
+    FileUploadModule,
     CardModule,
-    ButtonModule
+    PanelModule,
+    ButtonModule,
+    SplitButtonModule
+
   ],
   providers: [],
   entryComponents: [TestDialogComponent],

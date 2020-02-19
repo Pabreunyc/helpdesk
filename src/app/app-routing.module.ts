@@ -7,13 +7,15 @@ import { TableFooComponent } from './table-foo/table-foo.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestingComponent } from './testing/testing.component';
 import { MessagesListComponent } from './messages-list/messages-list.component';
+import { MessageViewComponent } from './components/message-view/message-view.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'table', component: TableFooComponent },
   { path: 'foo', component: DashboardComponent },
   { path: 'testing', component: TestingComponent},
-  { path: 'messages', component: MessagesListComponent }
+  { path: 'messages', component: MessagesListComponent },
+  { path: 'viewMessage', component: MessageViewComponent }
 ];
 
 @ NgModule({
