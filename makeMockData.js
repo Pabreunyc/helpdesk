@@ -10,7 +10,7 @@ const priority = ["Critical","High","Standard","Low","Request"];
 const subjects = [
   'Having a display problem', "Computer won't boot", "Printing comes out in bloack & white",
   "Waterheater is overheating", "Print this book", "Can't access network drive", "It's Not Working!!",
-  "help me", "need help with problem"]; 
+  "help me", "need help with problem"];
 const description = [
   "Cras quis quam pellentesque, pharetra elit pulvinar, elementum dolor.",
   "Nullam suscipit urna in velit facilisis bibendum.",
@@ -23,7 +23,7 @@ const description = [
   "Integer ultrices lectus sit amet nulla luctus, ac tristique nisl venenatis.",
   "Etiam sed erat a nunc vulputate sagittis nec eget nibh.",
   "Curabitur egestas ipsum quis dictum aliquet."];
-  
+
 let len = {
   u: users.length,
   c: category.length,
@@ -58,10 +58,11 @@ for(let i=0,ru; i<100; i++) {
     description: description[r(0,len.d)],
     category: category[r(0, len.c)],
     priority: priority[r(0,len.p)],
-    date: getRandomDate()
+    date: getRandomDate(),
+    status: getRandomIntInc(0,2),
   });
 }
-     
+
 console.log(JSON.stringify(json));
 
 function getRandomDate() {
@@ -70,7 +71,7 @@ function getRandomDate() {
 }
 
 function getRandomIntInc(min, max) {
-  //The maximum is inclusive and the minimum is inclusive 
+  //The maximum is inclusive and the minimum is inclusive
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min )) + min;

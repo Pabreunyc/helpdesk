@@ -1,32 +1,45 @@
+<form id='id_ticketForm' #ticketForm='ngForm' (ngSubmit)='submitTicket(ticketForm)'>
 <section fxLayout='row' fxLayoutAlign='space-evenly' fxLayoutGap="12px">
   <div fxFlex class="mat-elevation-z2">
     <p-panel header='{{user.name}} ({{user.email}})'>
-      <form ngForm=#userInfo>
+
         <div fxLayout fxLayoutAlign='space-evenly' fxLayoutGap='8px'>
           <input type='text' name='title' placeholder="Title" [(ngModel)]='user.title' pInputText>
-          <input type='text' name='dept' placeholder="Department" [(ngModel)]='user.dept' pInputText><br />
 
+          <span class='ui-float-label'>
+            <input type='text' id='float-dept' name='dept' [(ngModel)]='user.dept' pInputText>
+            <label for='float-dept'>Department</label>
+          </span>
         </div>
         <div fxLayout fxLayoutAlign='space-evenly' fxLayoutGap='8px' style='margin-top:8px'>
           <input fxFlex='100%' type='text' name='phone' placeholder="Phone" [(ngModel)]='user.phone' pInputText>
         </div>
-      </form>
     </p-panel>
     <br />
-    <p-panel header='Ticket Info'>
-      <p>Info!</p>
+    <p-panel header='Ticket Information ({{ticket.submittalDate| date: "medium" }})'>
+      <div fxLayout fxLayoutAlign='space-evenly' fxLayoutGap='8px' style='margin-top:8px'>
+        <p-dropdown [options]='ticket.products' name='products' [(ngModel)]='ticket.selectedProduct'></p-dropdown>
+        <p-dropdown [options]="ticket.category" name='category' [(ngModel)]='ticket.selectedCategory' optionLabel='ticket_sub_cat_detail'></p-dropdown>
+        <p-dropdown [options]="ticket.priority" name='priority' [(ngModel)]='ticket.selectedPriority'></p-dropdown>
+      </div>
+    </p-panel>
+    <br />
+
+    <p-panel header='Debug'>
+      {{ticketForm.form.valid}}
     </p-panel>
   </div>
 
   <div fxFlex class="mat-elevation-z2">
     <p-panel header='New Message'>
-      <form>
         <div class='ui-inputgroup'>
           <span class='ui-inputgroup-addon'><mat-icon>subject</mat-icon></span>
-          <input type="text" size="30" placeholder='Subject' pInputText>
+          <input type="text" pInputText name='subject' placeholder='Subject' [(ngModel)]='ticket.subject' required #spy>
         </div>
 
-        <textarea pInputTextarea placeholder="Describe Problem" rows='10' style='width:100%'></textarea>
+        <textarea pInputTextarea name='description' [(ngModel)]='ticket.description' placeholder="Describe Problem" rows='10' style='width:100%'></textarea>
+
+        <div>spy.subject: {{spy.className}}</div>
         <hr />
 
 
@@ -53,18 +66,22 @@
         </p-fileUpload>
 
         <div class='ui-inputgroup'>
-            <span class='ui-inputgroup-addon'>Attachment(s)&nbsp;</span>
-          <select>
-            <option>Attachment 1</option><option>Attachment 2</option><option>Attachment 3</option>
+            <span class='ui-inputgroup-addon'><span>Attachment(s):&nbsp;</span></span>
+          <select >
+            <option disabled selected value='0'>-- Attachment(s) ---</option>
+            <option value='100'>Attachment 1</option><option value='200'>Attachment 2</option><option value='300'>Attachment 3</option>
           </select>
-          <span class='ui-inputgroup-addon'><mat-icon>delete_forever</mat-icon></span>
+          <span class='ui-inputgroup-addon'>
+            <mat-icon>delete_forever</mat-icon></span>
         </div>
 
         <div fxLayout='row' fxLayoutAlign='end'>
           <button pButton type='button' class="ui-button-secondary" label='Cancel'></button> &nbsp;
-          <button pButton type="button" label="Success" class="ui-button-success" (click)="submitTicket($event)"></button>
+          <button pButton type="submit" label="Success"
+            form='id_ticketForm'
+            class="ui-button-success" ></button>
         </div>
-      </form>
     </p-panel>
   </div>
 </section>
+</form>

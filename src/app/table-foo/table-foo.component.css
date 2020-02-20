@@ -15,7 +15,7 @@ table.mat-table {
 }
 table.mat-table td.mat-cell:first-of-type,
 table.mat-table td.mat-footer-cell:first-of-type,
-table.mat-table th.mat-header-cell:first-of-type 
+table.mat-table th.mat-header-cell:first-of-type
 table.mat-table td.mat-cell{
   padding-left:4px !important;
   padding-right:4px !important;
@@ -52,10 +52,13 @@ mat-header-cell:first-child {
 
 .table-hover tr.mat-row:hover {
   color: #212529;
-  background-color: rgba(255, 255, 0, 0.075);
+  background-color: rgba(255, 255, 0, 0.15);
   cursor: pointer;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #000;
 }
 
 table#list-messages {
-  border:1px 
+  border:1px
 }

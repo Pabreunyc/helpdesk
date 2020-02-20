@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTable } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
+import { map, tap } from 'rxjs/operators';
 
 import { TableFooDataSource, TableFooItem } from './table-foo-datasource';
 
@@ -25,8 +26,15 @@ export class TableFooComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    //this.dataSource.paginator = this.paginator;
-    //this.table.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+
+    this.dataSource.paginator.page
+    .pipe(
+        tap((e) => {
+          console.log('>>', e);
+        })
+    );
+    // this.table.dataSource = this.dataSource;
   }
 
   tableRowClick(row) {

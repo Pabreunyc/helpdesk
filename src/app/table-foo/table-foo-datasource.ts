@@ -4,34 +4,30 @@ import { map, tap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import  messageList  from '../../assets/data/messagelist.json';
+import messageList from '../../assets/data/messagelist_2.json';
 
 // TODO: Replace this with your own data model type
 export interface TableFooItem {
   id: number;
-  from: string,
-  title: string,
+  from: string;
+  title: string;
   subject: string;
-  description: string,
+  description: string;
   category: string;
-  priority: string,
-  date:string
+  priority: string;
+  date: string;
+  status: number;
 }
 
 // TODO: replace this with real data from your application
-const TICKETS:TableFooItem[] = [
-  {id:100, from:'Fred Smith', title:'Landscape Architect', subject:'Having a problem displaying', description:'Something something eomsehting something else', category:'network', priority:'standard', date:'2-12-2020 12:12AM'},
-  {id:101, from: 'James Quigley', title:'Planner', subject:'Display Probs', description:'Somthing went wrong with something or something did something', category:'video', priority:'important', date:'2-12-2020 13:12AM'},
-  {id:102, from:'Mike Holmes', title:'contractor', subject:'Waterheater overheating', description:'He a was repairing a leaking bonus room above a garage, that of course was not done right in the first place, and he was on a ladder wiring a new receptacle for a garage door opener', category:'hardware', priority:'urgent', date:'2-12-2020 14:12AM'},
-  {id:103, from: 'Fred SMith', title:'Lanscape Architect', subject:'NYC1 Network Mainenance', description:'During the above window, the networking team...', category:'network' ,priority:'low', date:'2-15-2020 12:12AM'}
-];
+const TICKETS: TableFooItem[] = [];
 /**
  * Data source for the TableFoo view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
 export class TableFooDataSource extends DataSource<TableFooItem> {
-  data:TableFooItem[];
+  data: TableFooItem[];
   paginator: MatPaginator;
 
   /* constructor(private paginator: MatPaginator, private sort: MatSort) {
@@ -56,8 +52,13 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
       observableOf(this.data)
     ];
 
+    this.getPagedData(this.data);
+
     return merge(...dataMutations)
       .pipe(
+        tap((e) => {
+          console.log('tap:', e);
+        })
       );
   }
 
@@ -69,6 +70,11 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
     console.log('TableFooDataSources.disconnect');
   }
 
+  private getPagedData(data: any[]) {
+    const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+    console.log('--', startIndex, this.paginator.pageSize);
+    return data.splice(startIndex, this.paginator.pageSize);
+  }
 }
 
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
