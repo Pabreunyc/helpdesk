@@ -24,6 +24,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatDialogModule } from '@angular/material';
 import { MatPaginatorModule, MatProgressSpinnerModule, MatSortModule, MatTableModule } from '@angular/material';
 import { MatGridListModule, MatCardModule, MatMenuModule } from '@angular/material';
+import { MatDividerModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -75,6 +76,7 @@ import { MessageViewComponent } from './components/message-view/message-view.com
     MatCardModule,
     MatMenuModule,
     MatDialogModule,
+    MatDividerModule,
     AppRoutingModule,
     TableModule,
     InputTextModule,

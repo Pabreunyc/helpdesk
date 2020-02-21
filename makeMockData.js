@@ -4,6 +4,7 @@ const users = [
   {id:300, name: 'Johhny Storm', title:'The Torch', phone:'212-444-4443', email:'js@ff3.org' },
   {id:400, name:'Ben Grimm', title:'The Thinf', phone:'212-444-4444', email:'bg@ff4.org'}];
 
+const products = ['AutoCAD','General PC','Parking Permit','Printing'];
 const category = ["General Help","Software Issue","File Issue","Print Book","Other","Bucket List"];
 const priority = ["Critical","High","Standard","Low","Request"];
 
@@ -26,6 +27,7 @@ const description = [
 
 let len = {
   u: users.length,
+  x: products.length,
   c: category.length,
   p: priority.length,
   s: subjects.length,
@@ -56,6 +58,7 @@ for(let i=0,ru; i<100; i++) {
     title: ru.title,
     subject: subjects[r(0,len.s)],
     description: description[r(0,len.d)],
+    product: products[r(0, len.x)],
     category: category[r(0, len.c)],
     priority: priority[r(0,len.p)],
     date: getRandomDate(),

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TableFooDataSource, TableFooItem } from '../../table-foo/table-foo-datasource';
+import { MessagesListDataSource } from '../../messages-list/messages-list-datasource';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-message-view',
@@ -6,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./message-view.component.css']
 })
 export class MessageViewComponent implements OnInit {
+  private msgDS;
   user: {
     name: string;
     email: string;
@@ -13,7 +17,7 @@ export class MessageViewComponent implements OnInit {
     dept: string;
     phone: string;
   };
-  ticket: object = {
+  ticket = {
     products: [
       { value: null, label: '-- Product --' },
       { value: 1, label: 'AutoCAD' },
@@ -23,11 +27,11 @@ export class MessageViewComponent implements OnInit {
     ],
     priority: [
       { value: null, label: '-- Priority --'},
-      { value: 1, label: 'Critical' },
-      { value: 2, label: 'High' },
-      { value: 3, label: 'Standard' },
+      { value: 5, label: 'Request' },
       { value: 4, label: 'Low' },
-      { value: 5, label: 'Request' }
+      { value: 3, label: 'Standard' },
+      { value: 2, label: 'High' },
+      { value: 1, label: 'Critical' },
     ],
     category: [
       { id: null, ticket_cat_id: 3, ticket_sub_cat_detail: '-- Category --' },
@@ -39,14 +43,23 @@ export class MessageViewComponent implements OnInit {
       { id: 36, ticket_cat_id: 3, ticket_sub_cat_detail: 'Bucket List' }
     ]
   };
-  constructor() {
+  messageID: string;
+  messageHeader: string;
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.msgDS = TableFooDataSource;
     this.ticket['submittalDate'] = new Date();
+    this.messageHeader = 'View Message';
 
     this.ticket.category.map((e) => {
       e['label']  = e.ticket_sub_cat_detail;
       e['value']  = e.id;
     });
-    console.log(this.ticket.category);
+
+    // console.log('***', this.msgDS.getDataRow(1));
+    console.log('MessageViewComponent.constructor', this.msgDS);
   }
 
   // ==========================================================================
@@ -58,6 +71,9 @@ export class MessageViewComponent implements OnInit {
       dept: '',
       phone: '212-444-4441'
     };
+    this.messageID = this.route.snapshot.paramMap.get('rowID');
+    this.messageHeader += ` (ID: ${this.messageID})`;
+    console.log('MessageViewComponent.onInit', this.messageID, this.route.snapshot.paramMap);
   }
 
   submitTicket(f) {

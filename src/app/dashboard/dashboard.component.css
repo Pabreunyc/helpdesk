@@ -19,3 +19,11 @@
 .dashboard-card-content {
   text-align: center;
 }
+
+#ggrid2 {
+  background-color: #333;
+  border:1px solid #333;
+}
+#ggrid2 mat-grid-tile {
+  background-color: #fff;
+}

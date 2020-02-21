@@ -15,7 +15,9 @@ const routes: Routes = [
   { path: 'foo', component: DashboardComponent },
   { path: 'testing', component: TestingComponent},
   { path: 'messages', component: MessagesListComponent },
-  { path: 'viewMessage', component: MessageViewComponent }
+  { path: 'viewMessage', component: MessageViewComponent },
+  { path: 'viewMessage/:rowID', component: MessageViewComponent },
+  { path: '**', component: HomeComponent },
 ];
 
 @ NgModule({

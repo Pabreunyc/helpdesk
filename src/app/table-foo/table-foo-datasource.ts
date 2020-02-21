@@ -28,12 +28,11 @@ const TICKETS: TableFooItem[] = [];
  */
 export class TableFooDataSource extends DataSource<TableFooItem> {
   data: TableFooItem[];
-  paginator: MatPaginator;
 
   /* constructor(private paginator: MatPaginator, private sort: MatSort) {
     super();
   }*/
-  constructor() {
+  constructor(private paginator: MatPaginator) {
     super();
     this.data = messageList;
     console.log('TableFooDataSource.constructor:');
@@ -49,15 +48,15 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
-      observableOf(this.data)
+      observableOf(this.data),
+      this.paginator.page
     ];
 
-    this.getPagedData(this.data);
-
+    this.paginator.length = this.data.length;
     return merge(...dataMutations)
       .pipe(
-        tap((e) => {
-          console.log('tap:', e);
+        map(() => {
+          return this.getPagedData(this.data);
         })
       );
   }
@@ -70,10 +69,15 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
     console.log('TableFooDataSources.disconnect');
   }
 
+  public getDataRow(row: number) {
+    console.log('TableFooDataSource.getData', row);
+    return row[row];
+  }
+
   private getPagedData(data: any[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     console.log('--', startIndex, this.paginator.pageSize);
-    return data.splice(startIndex, this.paginator.pageSize);
+    return data.slice(startIndex, startIndex + this.paginator.pageSize);
   }
 }
 

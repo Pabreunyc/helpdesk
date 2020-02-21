@@ -18,26 +18,22 @@ export class TableFooComponent implements AfterViewInit, OnInit {
   selection: TableFooItem;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'from', 'subject', 'category', 'date', 'actions'];
+  displayedColumns = ['id', 'from', 'subject', 'product', 'category', 'date', 'actions'];
   alphabet;
 
   ngOnInit() {
-    this.dataSource = new TableFooDataSource();
+    console.log('tabTableFooComponent.onInit');
+    this.dataSource = new TableFooDataSource(this.paginator);
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    console.log('TableFooComponent.afterViewInit');
+    // this.dataSource.paginator = this.paginator;
 
-    this.dataSource.paginator.page
-    .pipe(
-        tap((e) => {
-          console.log('>>', e);
-        })
-    );
     // this.table.dataSource = this.dataSource;
   }
 
   tableRowClick(row) {
-    console.log('tableRowClick.click', row, event);
+    console.log('TableFooComponent.rowClick', {row, event});
   }
 }
