@@ -2,6 +2,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map, tap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
+import { MessagesService } from '../_services/messages.service';
 
 // TODO: Replace this with your own data model type
 export interface MessagesListItem {

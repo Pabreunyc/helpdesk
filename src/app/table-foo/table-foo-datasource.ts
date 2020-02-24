@@ -4,6 +4,7 @@ import { map, tap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
+import { MessagesService, MessagesListItem } from '../_services/messages.service';
 import messageList from '../../assets/data/messagelist_2.json';
 
 // TODO: Replace this with your own data model type
@@ -27,6 +28,7 @@ const TICKETS: TableFooItem[] = [];
  * (including sorting, pagination, and filtering).
  */
 export class TableFooDataSource extends DataSource<TableFooItem> {
+  private _messagesService;
   data: TableFooItem[];
 
   /* constructor(private paginator: MatPaginator, private sort: MatSort) {
@@ -35,7 +37,10 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
   constructor(private paginator: MatPaginator) {
     super();
     this.data = messageList;
+    this._messagesService = new MessagesService();
+
     console.log('TableFooDataSource.constructor:');
+    console.log(this._messagesService.getMessages());
   }
 
   /**

@@ -9,7 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputMaskModule } from 'primeng/inputmask';
@@ -40,7 +40,7 @@ import { TestingComponent } from './testing/testing.component';
 import { TestDialogComponent } from './testing/test-dialog/test-dialog.component';
 import { MessageViewComponent } from './components/message-view/message-view.component';
 
-
+import { MessagesService } from './_services/messages.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +90,7 @@ import { MessageViewComponent } from './components/message-view/message-view.com
     SplitButtonModule
 
   ],
-  providers: [],
+  providers: [MessagesService],
   entryComponents: [TestDialogComponent],
   bootstrap: [AppComponent]
 })
