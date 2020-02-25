@@ -23,6 +23,10 @@
     </p-panel>
     <br />
 
+    <p-panel header='Debug' *ngIf='true'> 
+      <a href='#' (click)='regetTicket(messageID)'>Reget ticket #{{messageID}}</a>
+    </p-panel>
+
     <p-panel header='Debug' *ngIf='false'>
       {{ticketForm.form.valid}}
     </p-panel>

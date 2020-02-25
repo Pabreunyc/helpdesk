@@ -39,8 +39,10 @@ import { TableFooComponent } from './table-foo/table-foo.component';
 import { TestingComponent } from './testing/testing.component';
 import { TestDialogComponent } from './testing/test-dialog/test-dialog.component';
 import { MessageViewComponent } from './components/message-view/message-view.component';
+import { MessageListComponent } from './components/message-list/message-list.component';
 
 import { MessagesService } from './_services/messages.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +55,8 @@ import { MessagesService } from './_services/messages.service';
     TableFooComponent,
     TestingComponent,
     TestDialogComponent,
-    MessageViewComponent
+    MessageViewComponent,
+    MessageListComponent
   ],
   imports: [
     BrowserModule,

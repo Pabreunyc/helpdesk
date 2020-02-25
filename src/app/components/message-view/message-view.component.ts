@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableFooDataSource, TableFooItem } from '../../table-foo/table-foo-datasource';
 import { MessagesListDataSource } from '../../messages-list/messages-list-datasource';
+import { MessagesService, messagesDataSource, MessagesListItem } from '../../_services/messages.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MessageViewComponent implements OnInit {
   private msgDS;
   user: {
+    id: number;
     name: string;
     email: string;
     title: string;
@@ -18,6 +20,7 @@ export class MessageViewComponent implements OnInit {
     phone: string;
   };
   ticket = {
+    data: {},
     products: [
       { value: null, label: '-- Product --' },
       { value: 1, label: 'AutoCAD' },
@@ -43,9 +46,12 @@ export class MessageViewComponent implements OnInit {
       { id: 36, ticket_cat_id: 3, ticket_sub_cat_detail: 'Bucket List' }
     ]
   };
-  messageID: string;
+  action: string;
+  message: object;
+  messageID: number;
   messageHeader: string;
   constructor(
+    private _messageService: MessagesService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
@@ -58,24 +64,42 @@ export class MessageViewComponent implements OnInit {
       e['value']  = e.id;
     });
 
-    // console.log('***', this.msgDS.getDataRow(1));
-    console.log('MessageViewComponent.constructor', this.msgDS);
+    console.log('MessageViewComponent.constructor');
   }
 
   // ==========================================================================
   ngOnInit() {
     this.user = {
-      name: 'Reed Richards',
-      email: 'rr@ff4.org',
-      title: 'Mr. Fantastic',
+      id: 0,
+      name: '',
+      email: '',
+      title: '',
       dept: '',
-      phone: '212-444-4441'
+      phone: ''
     };
-    this.messageID = this.route.snapshot.paramMap.get('rowID');
-    this.messageHeader += ` (ID: ${this.messageID})`;
-    console.log('MessageViewComponent.onInit', this.messageID, this.route.snapshot.paramMap);
+    this.messageID = +this.route.snapshot.paramMap.get('rowID') || 0;
+    this.action = this.route.snapshot.paramMap.get('action') || 'new';
+
+    console.log('MessageViewComponent.action:', this.action);
+    if(this.action === 'new') {
+      this.messageHeader = 'Open New Ticket';
+    }
+    if(this.action === 'view') {
+      this.messageHeader = 'Ticket ID: ' + this.messageID;
+      this._messageService.get(this.messageID)
+      .subscribe((d) => {
+        this.message = d
+        console.log('===>', d);
+        this.user.id = 
+      });
+    }
+  
   }
 
+  regetTicket(id) {
+    console.log('MessageViewComponent.regetTicket', this.messageID);
+    this._messageService.get(this.messageID).subscribe((d) => console.log('$$$', d));
+  }
   submitTicket(f) {
     let user = this.user;
     let ticket = this.ticket;

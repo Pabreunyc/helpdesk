@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestingComponent } from './testing/testing.component';
 import { MessagesListComponent } from './messages-list/messages-list.component';
 import { MessageViewComponent } from './components/message-view/message-view.component';
+import { MessageListComponent } from './components/message-list/message-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: 'foo', component: DashboardComponent },
   { path: 'testing', component: TestingComponent},
   { path: 'messages', component: MessagesListComponent },
+  { path: 'm', component: MessageListComponent },
   { path: 'viewMessage', component: MessageViewComponent },
+  { path: 'viewMessage/:action/:rowID', component: MessageViewComponent },
   { path: 'viewMessage/:rowID', component: MessageViewComponent },
   { path: '**', component: HomeComponent },
 ];

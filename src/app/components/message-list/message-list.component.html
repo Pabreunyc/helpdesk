@@ -1,0 +1,42 @@
+<div>
+  Table is loading: {{loading}}<br />
+  <a href='#' (click)='getData()'>GET DATA</a>
+</div>
+<hr />
+<div>
+  Current Selection:
+  <pre>{{currentSelection}}</pre>
+</div>
+<hr />
+<p-table [value]='messages'
+  selectionMode="single" [(selection)]='currentSelection' (onRowSelect)="getDetails($event)"
+  [loading]='loading'
+  >
+    <ng-template pTemplate='header'>
+      <tr>
+        <th style='min-width:4em;'>#</th>
+        <th style='min-width:20em'>From</th>
+        <th style='min-width:40em'>Subject</th>
+        <th style='min-width:14em'>Product</th>
+        <th style='min-width:14em'>Cat/Pri</th>
+        <th style='min-width:10em'>Date</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate='body' let-message>
+      <tr [pSelectableRow]='message'>
+        <td>{{message.id}}</td>
+        <td>{{message.from}}</td>
+        <td>
+          {{message.subject}}<br />
+          &nbsp;{{message.description}}
+        </td>
+        <td>{{message.product}}</td>
+        <td>
+          <span style="border-bottom:1px solid gray">{{message.category}}</span>
+          <br>
+          {{message.priority}}
+        </td>
+        <td>{{message.date}}</td>
+      </tr>
+    </ng-template>
+</p-table>
