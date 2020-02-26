@@ -42,6 +42,7 @@ import { MessageViewComponent } from './components/message-view/message-view.com
 import { MessageListComponent } from './components/message-list/message-list.component';
 
 import { MessagesService } from './_services/messages.service';
+import { ChooseUserComponent } from './components/choose-user/choose-user.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { MessagesService } from './_services/messages.service';
     TestingComponent,
     TestDialogComponent,
     MessageViewComponent,
-    MessageListComponent
+    MessageListComponent,
+    ChooseUserComponent
   ],
   imports: [
     BrowserModule,

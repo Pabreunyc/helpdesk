@@ -1,1 +1,28 @@
 .x111 { color:red; }
+
+.old-car {
+  background-color: #1CA979 !important;
+  color: #ffffff !important;
+  width: 10em;
+}
+
+.very-old-car {
+  background-color: #2CA8B1 !important;
+  color: #ffffff !important;
+}
+
+.old-car-width {
+  background-color: orange !important;
+  width:10em;
+}
+
+.messageTable {
+
+}
+.messageTable td {
+  font-size: 13px !important;
+  padding: 2px;
+}
+;
+td span.msgUnread::ng-deep { font-weight: bold !important; }
+td span.msgRead::ng-deep { font-weight: normal !important; };

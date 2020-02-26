@@ -1,33 +1,31 @@
-<div>
-  Table is loading: {{loading}}<br />
-  <a href='#' (click)='getData()'>GET DATA</a>
+
+<div fxLayout fxLayoutAlign='start' fxLayoutGap='8px' style='margin:8px 4px'>
+  <button pButton type="button" label='New Ticket' class="ui-button-success" routerLink='/viewMessage'></button>
 </div>
-<hr />
-<div>
-  Current Selection:
-  <pre>{{currentSelection}}</pre>
-</div>
-<hr />
-<p-table [value]='messages'
-  selectionMode="single" [(selection)]='currentSelection' (onRowSelect)="getDetails($event)"
-  [loading]='loading'
-  >
+<p-table [loading]="loading"
+  [value]="messages" [paginator]="true" [rows]="7"
+  [ngClass]="'messageTable'"
+  selectionMode="single" [(selection)]="currentSelection" (onRowSelect)="getDetails($event)">
     <ng-template pTemplate='header'>
       <tr>
-        <th style='min-width:4em;'>#</th>
-        <th style='min-width:20em'>From</th>
-        <th style='min-width:40em'>Subject</th>
-        <th style='min-width:14em'>Product</th>
-        <th style='min-width:14em'>Cat/Pri</th>
-        <th style='min-width:10em'>Date</th>
+        <th style="width: 3.5em">#</th>
+        <th style="width: 12em" class="old-car-width">From</th>
+        <th style="width: 40em">Subject</th>
+        <th style="width: 8em">Product</th>
+        <th style="width: 8em">Cat/Pri</th>
+        <th style="width: 8em">Date</th>
       </tr>
     </ng-template>
     <ng-template pTemplate='body' let-message>
       <tr [pSelectableRow]='message'>
         <td>{{message.id}}</td>
-        <td>{{message.from}}</td>
         <td>
-          {{message.subject}}<br />
+          {{message.from}} <br />
+          &nbsp;<span style='font-style:italic'>{{message.title}}</span>
+        </td>
+        <td>
+          <span [ngClass]="message.status == 1 ? 'msgUnread' : null">{{message.subject}} ({{message.status}})</span>
+          <br />
           &nbsp;{{message.description}}
         </td>
         <td>{{message.product}}</td>
@@ -36,7 +34,10 @@
           <br>
           {{message.priority}}
         </td>
-        <td>{{message.date}}</td>
+        <td>
+          {{message.date}}<br />
+          3:12 P
+        </td>
       </tr>
     </ng-template>
 </p-table>

@@ -37,7 +37,7 @@ export class TableFooDataSource extends DataSource<TableFooItem> {
   constructor(private paginator: MatPaginator) {
     super();
     this.data = messageList;
-    this._messagesService = new MessagesService();
+    // this._messagesService = new MessagesService();
 
     console.log('TableFooDataSource.constructor:');
     console.log(this._messagesService.getMessages());

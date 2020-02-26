@@ -9,6 +9,7 @@ import { TestingComponent } from './testing/testing.component';
 import { MessagesListComponent } from './messages-list/messages-list.component';
 import { MessageViewComponent } from './components/message-view/message-view.component';
 import { MessageListComponent } from './components/message-list/message-list.component';
+import { ChooseUserComponent } from './components/choose-user/choose-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'viewMessage', component: MessageViewComponent },
   { path: 'viewMessage/:action/:rowID', component: MessageViewComponent },
   { path: 'viewMessage/:rowID', component: MessageViewComponent },
+  { path: 'choose', component: ChooseUserComponent },
   { path: '**', component: HomeComponent },
 ];
 

@@ -2,12 +2,13 @@
 <section fxLayout='row' fxLayoutAlign='space-evenly' fxLayoutGap="12px">
   <div fxFlex>
     <p-panel header='{{user.name}} ({{user.email}})' styleClass='mat-elevation-z4'>
-      <div fxLayout fxLayoutAlign='space-evenly' fxLayoutGap='8px'>
+      <div fxLayout fxLayoutAlign='space-evenly' fxLayoutGap='8px' style='margin-top:8px'>
         <input type='text' name='title' placeholder="Title" [(ngModel)]='user.title' pInputText>
         <div><span class='ui-float-label'>
           <input type='text' id='float-dept' name='dept' [(ngModel)]='user.dept' pInputText>
           <label for='float-dept'>Department</label>
         </span></div>
+        <input type='text' name='other' placeholder="Other Input" [(ngModel)]='user.xxx' pInputText>
       </div>
 
       <div fxLayout fxLayoutAlign='start' fxLayoutGap='8px' style='margin-top:8px'>
@@ -23,7 +24,7 @@
     </p-panel>
     <br />
 
-    <p-panel header='Debug' *ngIf='true'> 
+    <p-panel header='Get Ticket Again' *ngIf='true'> 
       <a href='#' (click)='regetTicket(messageID)'>Reget ticket #{{messageID}}</a>
     </p-panel>
 
@@ -80,7 +81,7 @@
         </div>
 
         <div fxLayout='row' fxLayoutAlign='end'>
-          <button pButton type='button' class="ui-button-secondary" label='Cancel'></button> &nbsp;
+          <button pButton type='button' class="ui-button-secondary" label='Cancel' routerLink='/'></button> &nbsp;
           <button pButton type="submit" label="Success"
             form='id_ticketForm'
             class="ui-button-success" ></button>

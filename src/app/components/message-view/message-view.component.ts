@@ -20,6 +20,8 @@ export class MessageViewComponent implements OnInit {
     phone: string;
   };
   ticket = {
+    subject: '',
+    description: '',
     data: {},
     products: [
       { value: null, label: '-- Product --' },
@@ -28,6 +30,7 @@ export class MessageViewComponent implements OnInit {
       { value: 3, label: 'Parking Permit' },
       { value: 4, label: 'Printing' }
     ],
+    selectedProduct:null,
     priority: [
       { value: null, label: '-- Priority --'},
       { value: 5, label: 'Request' },
@@ -36,6 +39,7 @@ export class MessageViewComponent implements OnInit {
       { value: 2, label: 'High' },
       { value: 1, label: 'Critical' },
     ],
+    selectedPriority: null,
     category: [
       { id: null, ticket_cat_id: 3, ticket_sub_cat_detail: '-- Category --' },
       { id: 31, ticket_cat_id: 3, ticket_sub_cat_detail: 'General Help' },
@@ -44,10 +48,11 @@ export class MessageViewComponent implements OnInit {
       { id: 34, ticket_cat_id: 3, ticket_sub_cat_detail: 'Print Book' },
       { id: 35, ticket_cat_id: 3, ticket_sub_cat_detail: 'Other' },
       { id: 36, ticket_cat_id: 3, ticket_sub_cat_detail: 'Bucket List' }
-    ]
+    ],
+    selectedCategory: null
   };
   action: string;
-  message: object;
+  message: MessagesListItem;
   messageID: number;
   messageHeader: string;
   constructor(
@@ -88,9 +93,20 @@ export class MessageViewComponent implements OnInit {
       this.messageHeader = 'Ticket ID: ' + this.messageID;
       this._messageService.get(this.messageID)
       .subscribe((d) => {
-        this.message = d
-        console.log('===>', d);
-        this.user.id = 
+        this.message = JSON.parse(JSON.stringify(d));
+        console.log('===>', this.message);
+        this.user.name = (this.message as any).from;
+        this.user.title = (this.message as any).title;
+        this.user.email = '';
+        this.user.dept = '';
+        this.user.phone = '';
+
+        this.ticket.selectedProduct = this.ticket.products.find(i => i.label === this.message.product).value;
+        this.ticket.selectedPriority = this.ticket.priority.find(i => i.label === this.message.priority).value;
+        this.ticket.selectedCategory = this.ticket.category.find(i => i.ticket_sub_cat_detail === this.message.category);
+        this.ticket.subject = this.message.subject;
+        this.ticket.description = this.message.description;
+        console.log('-->', this.ticket);
       });
     }
   
