@@ -15,4 +15,9 @@ export class ChooseUserComponent implements OnInit {
     console.log('ChooseUserComponent.onInit');
   }
 
+  chooseProfile(profile) {
+    profile = (profile || '').trim().toLowerCase();
+    console.log(`profile: "${profile}"`);
+
+  }
 }

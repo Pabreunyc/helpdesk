@@ -1,36 +1,35 @@
 [
-{
-	id: 100,
-	name: 'Sue Storm',
-	email: 'sstorm@ff.org',
-	title:'invisible girl',
-	phone:'212-444-4444'
-},
-{	
-	id: 200,
-	name: 'Johhny Storm',
-	email: 'jstorm@ff.org',
-	title:'the torch
-	phone:'212-444-4445'
-},
-	id: 300,
-	name: 'Reed Richards',
-	email: 'reed@ff.org',
-	title:'mr. fantastic',
-	phone:'212-444-4444'
-},
-	id: 400,
-	name: 'Ben Grimm',
-	email: 'bgrimm@ff.org',
-	title:'the thing',
-	phone:'212-555-4444'
-},
-	id: 600,
-	name: 'Jennifer Walters'
-	email: 'jen@hulksinc.com'
-	title:'she-hulk',
-	phone:'718-123-7788'
-}
+  {
+      "id": 1,
+      "firstName": "Reed",
+      "lastName": "Richards",
+      "username": "rreed",
+      "password": "1",
+      "role": ["admin","editable"],
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoiRGVtby1FZGl0YWJsZSIsImxhc3ROYW1lIjoiU0EiLCJ1c2VybmFtZSI6IkRlbW9FIiwicGFzc3dvcmQiOiIxIiwicm9sZSI6WyJhZG1pbiIsImVkaXRhYmxlIl0sImlhdCI6MTU3NzQ1ODI2MiwiZXhwIjo0MTAyMzU4NDAwLCJpc3MiOiJqdW5raW1AZ21haWwuY29tIn0.-fqB1S2Rch2GGJ0o1xrV6sIu6CId0_z3C6Gg6VOT4Cg"
+  },{
+      "id": 2,
+      "firstName": "Sue",
+      "lastName": "Storm",
+      "username": "sstorm",
+      "password": "2",
+      "role": ["HelpdeskAdmin", "editable"],
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiRGVtby1SZWFkT25seSIsImxhc3ROYW1lIjoiU0EiLCJ1c2VybmFtZSI6IkRlbW9SIiwicGFzc3dvcmQiOiIxIiwicm9sZSI6WyJ1c2VyIiwicmVhZG9ubHkiXSwiaWF0IjoxNTc3NDU4MjYyLCJleHAiOjQxMDIzNTg0MDAsImlzcyI6Imp1bmtpbUBnbWFpbC5jb20ifQ.CBFDHeXhxglTmCNUIbYTa9F3Fb5t6tdtUoANoceihEg"
+  }, {
+    "id": 3,
+    "firstName": "Johhny",
+    "lastName": "Storm",
+    "username": "jstorm",
+    "password": "3",
+    "role": ["Helpdesk", "editable"],
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiRGVtby1SZWFkT25seSIsImxhc3ROYW1lIjoiU0EiLCJ1c2VybmFtZSI6IkRlbW9SIiwicGFzc3dvcmQiOiIxIiwicm9sZSI6WyJ1c2VyIiwicmVhZG9ubHkiXSwiaWF0IjoxNTc3NDU4MjYyLCJleHAiOjQxMDIzNTg0MDAsImlzcyI6Imp1bmtpbUBnbWFpbC5jb20ifQ.CBFDHeXhxglTmCNUIbYTa9F3Fb5t6tdtUoANoceihEg"
+  }, {
+    "id": 4,
+    "firstName": "Ben",
+    "lastName": "Grimm",
+    "username": "bgrimm",
+    "password": "4",
+    "role": ["Helpdesk", "editable"],
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiRGVtby1SZWFkT25seSIsImxhc3ROYW1lIjoiU0EiLCJ1c2VybmFtZSI6IkRlbW9SIiwicGFzc3dvcmQiOiIxIiwicm9sZSI6WyJ1c2VyIiwicmVhZG9ubHkiXSwiaWF0IjoxNTc3NDU4MjYyLCJleHAiOjQxMDIzNTg0MDAsImlzcyI6Imp1bmtpbUBnbWFpbC5jb20ifQ.CBFDHeXhxglTmCNUIbYTa9F3Fb5t6tdtUoANoceihEg"
+  }
 ]
-
-ticket
