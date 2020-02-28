@@ -23,6 +23,6 @@
   font-size: 13px !important;
   padding: 2px;
 }
-;
+
 td span.msgUnread::ng-deep { font-weight: bold !important; }
-td span.msgRead::ng-deep { font-weight: normal !important; };
+td span.msgRead::ng-deep { font-weight: normal !important; }

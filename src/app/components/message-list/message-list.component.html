@@ -1,6 +1,6 @@
 
 <div fxLayout fxLayoutAlign='start' fxLayoutGap='8px' style='margin:8px 4px'>
-  <button pButton type="button" label='New Ticket' class="ui-button-success" routerLink='/viewMessage'></button>
+  <button pButton type="button" label='New Ticket' class="ui-button-success" routerLink='/newMessage'></button>
 </div>
 <p-table [loading]="loading"
   [value]="messages" [paginator]="true" [rows]="7"
@@ -8,7 +8,7 @@
   selectionMode="single" [(selection)]="currentSelection" (onRowSelect)="getDetails($event)">
     <ng-template pTemplate='header'>
       <tr>
-        <th style="width: 3.5em">#</th>
+        <th style="width: 3em">#</th>
         <th style="width: 12em" class="old-car-width">From</th>
         <th style="width: 40em">Subject</th>
         <th style="width: 8em">Product</th>
@@ -24,7 +24,7 @@
           &nbsp;<span style='font-style:italic'>{{message.title}}</span>
         </td>
         <td>
-          <span [ngClass]="message.status == 1 ? 'msgUnread' : null">{{message.subject}} ({{message.status}})</span>
+          <span [ngClass]="message.status == 1 ? 'msgUnread' : null">{{message.subject}}</span>
           <br />
           &nbsp;{{message.description}}
         </td>
@@ -36,7 +36,7 @@
         </td>
         <td>
           {{message.date}}<br />
-          3:12 P
+          3:12 PM
         </td>
       </tr>
     </ng-template>

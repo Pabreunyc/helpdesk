@@ -5,7 +5,7 @@
       "lastName": "Richards",
       "username": "rreed",
       "password": "1",
-      "role": ["admin","editable"],
+      "role": ["Admin","editable"],
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoiRGVtby1FZGl0YWJsZSIsImxhc3ROYW1lIjoiU0EiLCJ1c2VybmFtZSI6IkRlbW9FIiwicGFzc3dvcmQiOiIxIiwicm9sZSI6WyJhZG1pbiIsImVkaXRhYmxlIl0sImlhdCI6MTU3NzQ1ODI2MiwiZXhwIjo0MTAyMzU4NDAwLCJpc3MiOiJqdW5raW1AZ21haWwuY29tIn0.-fqB1S2Rch2GGJ0o1xrV6sIu6CId0_z3C6Gg6VOT4Cg"
   },{
       "id": 2,

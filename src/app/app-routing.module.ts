@@ -12,13 +12,13 @@ import { MessageListComponent } from './components/message-list/message-list.com
 import { ChooseUserComponent } from './components/choose-user/choose-user.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: ChooseUserComponent },
   { path: 'table', component: TableFooComponent },
   { path: 'foo', component: DashboardComponent },
   { path: 'testing', component: TestingComponent},
   { path: 'messages', component: MessagesListComponent },
-  { path: 'm', component: MessageListComponent },
-  { path: 'viewMessage', component: MessageViewComponent },
+  { path: 'listMessages', component: MessageListComponent },
+  { path: 'newMessage', component: MessageViewComponent },
   { path: 'viewMessage/:action/:rowID', component: MessageViewComponent },
   { path: 'viewMessage/:rowID', component: MessageViewComponent },
   { path: 'choose', component: ChooseUserComponent },

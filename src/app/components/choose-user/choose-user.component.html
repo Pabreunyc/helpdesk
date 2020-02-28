@@ -2,16 +2,12 @@
   fxLayout='column'>
 
     <section fxItem='1' fxFlexAlign="center">
-      <div>
-        <h4>Header</h4>
-        <p>Some Body Content 1</p>
-        <p>Some Body Content 12</p>
-        <p>Some Body Content 123</p>
-        <p>Some Body Content 1234</p>
-        <p>Some Body Content 12345</p>
-        <p>Some Body Content 123456</p>
-        <p>Some Body Content 1234567</p>
-        <p>Some Body Content 12345678</p>
+      <div style='text-align: center'>
+        <h4>Profile Chooser</h4>
+        <p>Views render according to various access classes.
+          Please choose appropiate access role from available classes below</p>
+        <br /><br />
+        <mat-icon style='font-size: 3em; color:green'>verified_user</mat-icon><br />
       </div>
     </section>
 
@@ -35,7 +31,7 @@
         <div style='text-align: center'>
           <button type='button' mat-raised-button color="accent"
             style="font-size:36px !important;"
-            (click)="chooseProfile('admin')">
+            (click)="chooseProfile('Admin')">
             <mat-icon>play_circle_filled</mat-icon> Go!
           </button>
         </div>
@@ -52,7 +48,7 @@
         <div style='text-align: center'>
           <button type='button' mat-raised-button color="primary"
             style="font-size:36px !important;"
-            (click)="chooseProfile('support')">
+            (click)="chooseProfile('HelpdeskAdmin')">
             <mat-icon>play_circle_filled</mat-icon> Go!
           </button>
         </div>
@@ -69,7 +65,7 @@
           <div style='text-align: center'>
             <button type='button' mat-raised-button color="warn"
               style="font-size:36px !important;"
-              (click)="chooseProfile('user')">
+              (click)="chooseProfile('Helpdesk')">
               <mat-icon>play_circle_filled</mat-icon> Go!
             </button>
           </div>
