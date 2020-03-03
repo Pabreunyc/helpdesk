@@ -10,14 +10,15 @@ import { MessagesListComponent } from './messages-list/messages-list.component';
 import { MessageViewComponent } from './components/message-view/message-view.component';
 import { MessageListComponent } from './components/message-list/message-list.component';
 import { ChooseUserComponent } from './components/choose-user/choose-user.component';
+import { AuthguardGuard } from './_guards/authguard.guard';
 
 const routes: Routes = [
-  { path: '', component: ChooseUserComponent },
+  { path: '', redirectTo: '/choose', pathMatch: 'full' },
   { path: 'table', component: TableFooComponent },
   { path: 'foo', component: DashboardComponent },
   { path: 'testing', component: TestingComponent},
   { path: 'messages', component: MessagesListComponent },
-  { path: 'listMessages', component: MessageListComponent },
+  { path: 'listMessages', component: MessageListComponent, canActivate: [AuthguardGuard] },
   { path: 'newMessage', component: MessageViewComponent },
   { path: 'viewMessage/:action/:rowID', component: MessageViewComponent },
   { path: 'viewMessage/:rowID', component: MessageViewComponent },
