@@ -11,14 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MessageViewComponent implements OnInit {
   private msgDS;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-    title: string;
-    dept: string;
-    phone: string;
-  };
+  user: object;
   ticket = {
     subject: '',
     description: '',
@@ -60,6 +53,7 @@ export class MessageViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
   ) {
+
     this.msgDS = TableFooDataSource;
     this.ticket['submittalDate'] = new Date();
     this.messageHeader = 'View Message';
@@ -109,7 +103,7 @@ export class MessageViewComponent implements OnInit {
         console.log('-->', this.ticket);
       });
     }
-  
+
   }
 
   regetTicket(id) {

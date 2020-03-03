@@ -14,10 +14,10 @@ private loading = true;
 public style = {
   table: 'border:3px solid red',
 };
+public currentUser;
 public messageSource = new messagesDataSource(this._messageService);
 public messages;
 public currentSelection;
-
 
   constructor(
     private _messageService: MessagesService,
@@ -25,15 +25,20 @@ public currentSelection;
     private router: Router
   ) {
     console.warn('MessageListComponent.constructor');
+    this.currentUser = JSON.parse(sessionStorage.getItem('user'));
+    if (this.currentUser == null) {
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit() {
-    let self = this;
+    const  self = this;
 
     console.log(this.messageSource.connect());
     this.loading = true;
     self._messageService.getMessagesP()
       .then((d) => {
+
         self.messages = d;
         self.loading = false;
       });
