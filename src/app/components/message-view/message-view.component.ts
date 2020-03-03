@@ -4,6 +4,9 @@ import { MessagesListDataSource } from '../../messages-list/messages-list-dataso
 import { MessagesService, messagesDataSource, MessagesListItem } from '../../_services/messages.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { User } from '../../_models/user.model';
+import { UserService } from '../../_services/user.service';
+
 @Component({
   selector: 'app-message-view',
   templateUrl: './message-view.component.html',
@@ -11,7 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MessageViewComponent implements OnInit {
   private msgDS;
-  user: object;
+  user: User;
   ticket = {
     subject: '',
     description: '',
@@ -48,48 +51,44 @@ export class MessageViewComponent implements OnInit {
   message: MessagesListItem;
   messageID: number;
   messageHeader: string;
+
   constructor(
     private _messageService: MessagesService,
+    private _userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
-
     this.msgDS = TableFooDataSource;
-    this.ticket['submittalDate'] = new Date();
+    this.ticket[`submittalDate`] = new Date();
     this.messageHeader = 'View Message';
+    this.user = _userService.currentUser();
 
     this.ticket.category.map((e) => {
-      e['label']  = e.ticket_sub_cat_detail;
-      e['value']  = e.id;
+      e[`label`]  = e.ticket_sub_cat_detail;
+      e[`value`]  = e.id;
     });
 
-    console.log('MessageViewComponent.constructor');
+    console.log('MessageViewComponent.constructor', this);
   }
 
   // ==========================================================================
   ngOnInit() {
-    this.user = {
-      id: 0,
-      name: '',
-      email: '',
-      title: '',
-      dept: '',
-      phone: ''
-    };
     this.messageID = +this.route.snapshot.paramMap.get('rowID') || 0;
     this.action = this.route.snapshot.paramMap.get('action') || 'new';
 
     console.log('MessageViewComponent.action:', this.action);
-    if(this.action === 'new') {
+
+    if ([' ', 'new'].indexOf(this.action) !== -1) {
       this.messageHeader = 'Open New Ticket';
     }
-    if(this.action === 'view') {
+    if (this.action === 'view') {
       this.messageHeader = 'Ticket ID: ' + this.messageID;
       this._messageService.get(this.messageID)
       .subscribe((d) => {
         this.message = JSON.parse(JSON.stringify(d));
         console.log('===>', this.message);
-        this.user.name = (this.message as any).from;
+
+        [this.user.firstName, this.user.lastName] = (this.message as any).from.split(' ');
         this.user.title = (this.message as any).title;
         this.user.email = '';
         this.user.dept = '';
@@ -110,6 +109,7 @@ export class MessageViewComponent implements OnInit {
     console.log('MessageViewComponent.regetTicket', this.messageID);
     this._messageService.get(this.messageID).subscribe((d) => console.log('$$$', d));
   }
+
   submitTicket(f) {
     let user = this.user;
     let ticket = this.ticket;

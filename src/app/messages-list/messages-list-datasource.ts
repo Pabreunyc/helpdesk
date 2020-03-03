@@ -45,9 +45,7 @@ export class MessagesListDataSource extends DataSource<MessagesListItem> {
 
   constructor() {
     super();
-    this.data.map(function(e) {
-      e.symbol = e.name[0];
-    });
+    this.data.map((e) => e.symbol = e.name.slice(0, 1));
     console.log('MessagesListDataSource.construct', this.data);
   }
 

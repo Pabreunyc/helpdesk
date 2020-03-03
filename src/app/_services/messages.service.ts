@@ -44,7 +44,7 @@ public mq: Observable<any>;
     return this.http.get(this.DATA_API).pipe(
       delay(500))
       .toPromise()
-      .then(res => <MessagesListItem>res);
+      .then(res => res as MessagesListItem);
   }
 }
 

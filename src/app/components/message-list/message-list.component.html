@@ -3,7 +3,8 @@
   <button pButton type="button" label='New Ticket' class="ui-button-success" routerLink='/newMessage'></button>
 </div>
 <p-table [loading]="loading"
-  [value]="messages" [paginator]="true" [rows]="7"
+  [value]="messages"
+  [paginator]="true" [rows]='10' [rowsPerPageOptions]="[10,20,30]"
   [ngClass]="'messageTable'"
   selectionMode="single" [(selection)]="currentSelection" (onRowSelect)="getDetails($event)">
     <ng-template pTemplate='header'>

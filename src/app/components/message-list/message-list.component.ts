@@ -38,9 +38,12 @@ public currentSelection;
     this.loading = true;
     self._messageService.getMessagesP()
       .then((d) => {
-
+        console.log('_messageService.getMessagesP', d);
         self.messages = d;
         self.loading = false;
+      })
+      .catch((e) => {
+        console.log('messageService.getMessagesP.catch', e);
       });
   }
 

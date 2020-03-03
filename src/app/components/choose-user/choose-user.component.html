@@ -11,6 +11,15 @@
       </div>
     </section>
 
+    <section fxItem='1' fxFlexAlign='center'>
+      <table>
+        <tr *ngFor='let u of users'>
+          <td>{{u.id}}</td>
+          <td>{{u.firstName}} {{u.lastName}}</td>
+        </tr>
+      </table>
+    </section>
+
     <section
       fxItem='1'
       fxLayout='row' fxLayout.lt-md='column'

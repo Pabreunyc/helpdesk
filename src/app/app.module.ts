@@ -40,9 +40,10 @@ import { TestingComponent } from './testing/testing.component';
 import { TestDialogComponent } from './testing/test-dialog/test-dialog.component';
 import { MessageViewComponent } from './components/message-view/message-view.component';
 import { MessageListComponent } from './components/message-list/message-list.component';
+import { ChooseUserComponent } from './components/choose-user/choose-user.component';
 
 import { MessagesService } from './_services/messages.service';
-import { ChooseUserComponent } from './components/choose-user/choose-user.component';
+import { UserService } from './_services/user.service';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,7 @@ import { ChooseUserComponent } from './components/choose-user/choose-user.compon
     SplitButtonModule
 
   ],
-  providers: [MessagesService],
+  providers: [MessagesService, UserService],
   entryComponents: [TestDialogComponent],
   bootstrap: [AppComponent]
 })

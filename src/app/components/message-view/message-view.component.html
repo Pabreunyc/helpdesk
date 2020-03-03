@@ -1,7 +1,11 @@
 <form id='id_ticketForm' #ticketForm='ngForm' (ngSubmit)='submitTicket(ticketForm)'>
-<section fxLayout='row' fxLayoutAlign='space-evenly' fxLayoutGap="12px">
-  <div fxFlex>
-    <p-panel header='{{user.name}} ({{user.email}})' styleClass='mat-elevation-z4'>
+<section
+  fxLayout='row'
+  fxLayoutAlign='space-evenly'
+  fxLayoutGap="12px">
+
+  <div fxItem>
+    <p-panel header='{{user.firstName}} {{user.lastName}} ({{user.email}})' styleClass='mat-elevation-z4'>
       <div fxLayout fxLayoutAlign='space-evenly' fxLayoutGap='8px' style='margin-top:8px'>
         <input type='text' name='title' placeholder="Title" [(ngModel)]='user.title' pInputText>
         <div><span class='ui-float-label'>
@@ -24,16 +28,12 @@
     </p-panel>
     <br />
 
-    <p-panel header='Get Ticket Again' *ngIf='true'> 
-      <a href='#' (click)='regetTicket(messageID)'>Reget ticket #{{messageID}}</a>
-    </p-panel>
-
     <p-panel header='Debug' *ngIf='false'>
       {{ticketForm.form.valid}}
     </p-panel>
   </div>
 
-  <div fxFlex>
+  <div fxItem>
     <p-panel [header]='messageHeader' class="mat-elevation-z2">
         <div class='ui-inputgroup'>
           <span class='ui-inputgroup-addon'><mat-icon>subject</mat-icon></span>
