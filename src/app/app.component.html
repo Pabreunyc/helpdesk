@@ -1,4 +1,4 @@
-<mat-toolbar style="border-bottom:1px solid #ccc">
+<mat-toolbar style="border-bottom:1px solid #ccc; background-color:#fff;">
   <mat-toolbar-row>
     <button
       type="button"
@@ -8,12 +8,12 @@
       *ngIf="isHandset$ | async">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    <img src='http://localhost:9000/images/ornate/ornate-skull-2-48-221586.png' style="height:60px; width:60px">
+    <a routerLink='/' href><img src='assets/images/nyc_parks_logo.png' style="height:60px; width:60px"></a>
     <span style='color:#88c659 !important;font-weight:bold;font-variant:small-caps'>{{title}}</span>
     <mat-nav-list fxLayout>
       <a mat-list-item href routerLink='/listMessages'>List</a>
       <a mat-list-item href routerLink='/newMessage'>New</a>
-      <a mat-list-item href routerLink='/choose'>Logout</a>
+      <a mat-list-item href routerLink='/choose' fxFlexAlign='end'>Logout</a>
     </mat-nav-list>
   </mat-toolbar-row>
 </mat-toolbar>
