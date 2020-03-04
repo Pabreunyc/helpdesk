@@ -13,9 +13,13 @@ import { UserService } from '../../_services/user.service';
   styleUrls: ['./message-view.component.css']
 })
 export class MessageViewComponent implements OnInit {
-  private msgDS;
-  user: User;
-  ticket = {
+  private currentUser;
+  private currentRole;
+  private isAdmin;
+  public appHasRole;
+  public xxx;
+  private ticket = {
+    from: <User>{},
     subject: '',
     description: '',
     data: {},
@@ -58,10 +62,11 @@ export class MessageViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    this.msgDS = TableFooDataSource;
     this.ticket[`submittalDate`] = new Date();
     this.messageHeader = 'View Message';
-    this.user = _userService.currentUser();
+
+    this.currentUser = this._userService.currentUser();
+    this.currentRole = this._userService.currentRole();
 
     this.ticket.category.map((e) => {
       e[`label`]  = e.ticket_sub_cat_detail;
@@ -73,6 +78,7 @@ export class MessageViewComponent implements OnInit {
 
   // ==========================================================================
   ngOnInit() {
+    this.isAdmin = this.currentRole.map(e => e.toLowerCase()).includes('admin');
     this.messageID = +this.route.snapshot.paramMap.get('rowID') || 0;
     this.action = this.route.snapshot.paramMap.get('action') || 'new';
 
@@ -82,21 +88,28 @@ export class MessageViewComponent implements OnInit {
       this.messageHeader = 'Open New Ticket';
     }
     if (this.action === 'view') {
-      this.messageHeader = 'Ticket ID: ' + this.messageID;
+      this.messageHeader = `Ticket ID: ${this.messageID}`;
+
       this._messageService.get(this.messageID)
       .subscribe((d) => {
         this.message = JSON.parse(JSON.stringify(d));
-        console.log('===>', this.message);
+        console.log('===>', d);
 
-        [this.user.firstName, this.user.lastName] = (this.message as any).from.split(' ');
-        this.user.title = (this.message as any).title;
-        this.user.email = '';
-        this.user.dept = '';
-        this.user.phone = '';
+        [this.ticket.from.firstName, this.ticket.from.lastName] = (this.message as any).from.split(' ');
+        this.ticket.from.title = (this.message as any).title;
+        this.ticket.from.email = '';
+        this.ticket.from.dept = '';
+        this.ticket.from.phone = '';
+
+        if(this.message.status)
+          this.messageHeader += '&nbsp;|OPEN';
+        else
+          this.messageHeader += '&nbsp;|(Closed)';
 
         this.ticket.selectedProduct = this.ticket.products.find(i => i.label === this.message.product).value;
         this.ticket.selectedPriority = this.ticket.priority.find(i => i.label === this.message.priority).value;
         this.ticket.selectedCategory = this.ticket.category.find(i => i.ticket_sub_cat_detail === this.message.category);
+
         this.ticket.subject = this.message.subject;
         this.ticket.description = this.message.description;
         console.log('-->', this.ticket);
@@ -105,13 +118,18 @@ export class MessageViewComponent implements OnInit {
 
   }
 
+  hasAuth(role) {
+    console.log('hasAuth:', role);
+    this.currentRole.map(e => e.toLowerCase()).includes(role);
+  }
+
   regetTicket(id) {
     console.log('MessageViewComponent.regetTicket', this.messageID);
     this._messageService.get(this.messageID).subscribe((d) => console.log('$$$', d));
   }
 
   submitTicket(f) {
-    let user = this.user;
+    let user = this.currentUser;
     let ticket = this.ticket;
 
     console.group('submitTicket');

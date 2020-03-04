@@ -33,5 +33,6 @@ export class DashboardComponent {
 
   constructor(private breakpointObserver: BreakpointObserver) {
     console.log('DashboardComponent.construct');
+    console.log('DashboardComponent', Breakpoints.Handset);
   }
 }

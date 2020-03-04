@@ -16,6 +16,7 @@ export class AuthguardGuard implements CanActivate, CanActivateChild {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
+    const allowedRoles = next.data.allowedRoles;
 
     console.group('=====> AuthguardGuard.canActivate <=====');
     console.log('next:', next); console.log('state:', state);

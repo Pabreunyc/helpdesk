@@ -1,6 +1,7 @@
 
 <div fxLayout fxLayoutAlign='start' fxLayoutGap='8px' style='margin:8px 4px'>
   <button pButton type="button" label='New Ticket' class="ui-button-success" routerLink='/newMessage'></button>
+  <div>{{currentUser.firstName}} {{currentUser.lastName}}</div><div>{{currentRole}}</div>
 </div>
 <p-table [loading]="loading"
   [value]="messages"

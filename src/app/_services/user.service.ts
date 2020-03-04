@@ -19,6 +19,9 @@ export class UserService {
   currentUser(): User {
     return JSON.parse(sessionStorage.getItem('user'));
   }
+  currentRole(): Array<any> {
+    return JSON.parse(sessionStorage.getItem('user')).role;
+  }
 
   allUsers(): Observable<User[]> {
     let users$;

@@ -44,6 +44,7 @@ import { ChooseUserComponent } from './components/choose-user/choose-user.compon
 
 import { MessagesService } from './_services/messages.service';
 import { UserService } from './_services/user.service';
+import { HasRoleDirective } from './_directives/has-role.directive';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { UserService } from './_services/user.service';
     TestDialogComponent,
     MessageViewComponent,
     MessageListComponent,
-    ChooseUserComponent
+    ChooseUserComponent,
+    HasRoleDirective
   ],
   imports: [
     BrowserModule,

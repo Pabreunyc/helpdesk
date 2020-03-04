@@ -38,7 +38,7 @@ public mq: Observable<any>;
     );
   }
   getMessages(): Observable<MessagesListItem[]> {
-    return this.http.get<MessagesListItem[]>(this.DATA_API);
+    return this.http.get<MessagesListItem[]>(this.DATA_API).pipe(delay(1000));
   }
   getMessagesP() {
     return this.http.get(this.DATA_API).pipe(

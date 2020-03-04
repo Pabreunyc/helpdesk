@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { MessagesService, messagesDataSource, MessagesListItem } from '../../_services/messages.service';
+import { UserService } from '../../_services/user.service';
+
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataSource } from '@angular/cdk/collections';
 
@@ -9,42 +11,57 @@ import { DataSource } from '@angular/cdk/collections';
   templateUrl: './message-list.component.html',
   styleUrls: ['./message-list.component.css']
 })
-export class MessageListComponent implements OnInit {
+export class MessageListComponent implements OnInit, OnDestroy {
 private loading = true;
+private subscriptions: Array<Subscription>;
+
 public style = {
   table: 'border:3px solid red',
 };
-public currentUser;
+private currentUser;
+private currentRole;
+
 public messageSource = new messagesDataSource(this._messageService);
-public messages;
+public messages: MessagesListItem[];
 public currentSelection;
 
   constructor(
     private _messageService: MessagesService,
+    private _userService: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) {
     console.warn('MessageListComponent.constructor');
-    this.currentUser = JSON.parse(sessionStorage.getItem('user'));
-    if (this.currentUser == null) {
-      this.router.navigate(['/']);
-    }
+    this.subscriptions = [];
+    this.currentUser = _userService.currentUser();
+    this.currentRole = _userService.currentRole();
   }
 
   ngOnInit() {
+    let tmp;
+    let fullname = `${this.currentUser.firstName} ${this.currentUser.lastName}`;
     const  self = this;
-
-    console.log(this.messageSource.connect());
+    const userFrom = this.currentUser.firstName + ' ' + this.currentUser.lastName;
     this.loading = true;
-    self._messageService.getMessagesP()
-      .then((d) => {
-        console.log('_messageService.getMessagesP', d);
-        self.messages = d;
-        self.loading = false;
-      })
-      .catch((e) => {
-        console.log('messageService.getMessagesP.catch', e);
-      });
+
+    tmp = this._messageService.getMessages().subscribe((d) => {
+      console.log('MessageListComponent._messageService.getMessages');
+      console.log('&&', this.currentRole, this.currentRole.includes('Helpdesk'));
+
+      if(this.currentRole.includes('Helpdesk'))
+        this.messages = d.filter(m => m.from === fullname);
+      else
+        this.messages = d;
+
+      this.loading = false;
+    });
+    this.subscriptions.push(tmp);
+    tmp = null;
+
+  }
+  ngOnDestroy() {
+    console.log('MessageListComponent.onDestroy', this.subscriptions);
+    this.subscriptions.map(s => s.unsubscribe());
   }
 
   getDetails(evt) {

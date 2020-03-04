@@ -40,7 +40,7 @@ export class ChooseUserComponent implements OnInit {
       case 'Admin':
       case 'HelpdeskAdmin':
       case 'Helpdesk': {
-        this.currentUser = this.users.filter((u) =>
+        this.currentUser = <any>this.users.filter((u) =>
           u.role.includes(profile)
         );
         this.currentUser = this.currentUser[0];
