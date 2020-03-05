@@ -26,7 +26,8 @@
           &nbsp;<span style='font-style:italic'>{{message.title}}</span>
         </td>
         <td>
-          <span [ngClass]="message.status == 1 ? 'msgUnread' : null">{{message.subject}}</span>
+          <span [ngClass]="message.status == 1 ? 'msgUnread' : null">
+            <mat-icon [style.color]="message.status == 1 ? 'green' : 'red'">label_important</mat-icon>{{message.subject}}</span>
           <br />
           &nbsp;{{message.description}}
         </td>

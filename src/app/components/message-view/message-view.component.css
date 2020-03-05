@@ -10,6 +10,12 @@ input, select, textarea {
 }
 
 
-.ui-panel {
+p-panel div.ui-panel::ng-deep {
   margin: 1em .5em;
+  background-color: red;
 }
+
+#xxx, .x3 {
+  background-color: olivedrab
+}
+

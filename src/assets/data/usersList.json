@@ -13,7 +13,7 @@
       "lastName": "Storm",
       "username": "sstorm",
       "password": "2",
-      "role": ["HelpdeskAdmin", "editable"],
+      "role": ["Admin", "editable"],
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiRGVtby1SZWFkT25seSIsImxhc3ROYW1lIjoiU0EiLCJ1c2VybmFtZSI6IkRlbW9SIiwicGFzc3dvcmQiOiIxIiwicm9sZSI6WyJ1c2VyIiwicmVhZG9ubHkiXSwiaWF0IjoxNTc3NDU4MjYyLCJleHAiOjQxMDIzNTg0MDAsImlzcyI6Imp1bmtpbUBnbWFpbC5jb20ifQ.CBFDHeXhxglTmCNUIbYTa9F3Fb5t6tdtUoANoceihEg"
   }, {
     "id": 3,

@@ -20,6 +20,9 @@ export class MessageViewComponent implements OnInit {
   public xxx;
   private ticket = {
     from: <User>{},
+    action: '',
+    status: 0,
+    header: '',
     subject: '',
     description: '',
     data: {},
@@ -49,7 +52,10 @@ export class MessageViewComponent implements OnInit {
       { id: 35, ticket_cat_id: 3, ticket_sub_cat_detail: 'Other' },
       { id: 36, ticket_cat_id: 3, ticket_sub_cat_detail: 'Bucket List' }
     ],
-    selectedCategory: null
+    selectedCategory: null,
+    selectedAttachment: null,
+    submittalDate: null,
+    submitLabel: 'Submit'
   };
   action: string;
   message: MessagesListItem;
@@ -62,7 +68,7 @@ export class MessageViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    this.ticket[`submittalDate`] = new Date();
+    this.ticket.submittalDate = new Date();
     this.messageHeader = 'View Message';
 
     this.currentUser = this._userService.currentUser();
@@ -85,11 +91,13 @@ export class MessageViewComponent implements OnInit {
     console.log('MessageViewComponent.action:', this.action);
 
     if ([' ', 'new'].indexOf(this.action) !== -1) {
-      this.messageHeader = 'Open New Ticket';
+      this.ticket.action = 'new';
+      this.ticket.header = 'Open New Ticket';
+      this.ticket.from = this.currentUser;
+      this.ticket.from.email = this.currentUser.username + '@host.com';
     }
     if (this.action === 'view') {
-      this.messageHeader = `Ticket ID: ${this.messageID}`;
-
+      this.ticket.action = 'view';
       this._messageService.get(this.messageID)
       .subscribe((d) => {
         this.message = JSON.parse(JSON.stringify(d));
@@ -101,10 +109,10 @@ export class MessageViewComponent implements OnInit {
         this.ticket.from.dept = '';
         this.ticket.from.phone = '';
 
-        if(this.message.status)
-          this.messageHeader += '&nbsp;|OPEN';
-        else
-          this.messageHeader += '&nbsp;|(Closed)';
+        this.ticket.status = this.message.status;
+        this.ticket.header = `Ticket ID: ${this.messageID}`;
+        // this.ticket.header += this.message.status ? ' |OPEN' : ' |(Closed)';
+
 
         this.ticket.selectedProduct = this.ticket.products.find(i => i.label === this.message.product).value;
         this.ticket.selectedPriority = this.ticket.priority.find(i => i.label === this.message.priority).value;
@@ -119,8 +127,11 @@ export class MessageViewComponent implements OnInit {
   }
 
   hasAuth(role) {
-    console.log('hasAuth:', role);
-    this.currentRole.map(e => e.toLowerCase()).includes(role);
+    let ret = false;
+    ret = this.currentRole.map(e => e.toLowerCase()).includes(role);
+    //console.log('hasAuth:', this.currentRole, role, ret);
+
+    return ret;
   }
 
   regetTicket(id) {
@@ -150,7 +161,13 @@ export class MessageViewComponent implements OnInit {
   onBasicUploading(e) {
     console.log('uploading', e);
   }
-  deleteAttachment() {
-    console.log('deleteAttachment');
+  foo(e) {
+    console.log('foo', e);
+  }
+  deleteAttachment(id) {
+    console.log('deleteAttachment', id);
+    console.log('deleteAttachment', event);
+
+    return false;
   }
 }
