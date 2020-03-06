@@ -20,6 +20,7 @@ export class MessageViewComponent implements OnInit {
   public xxx;
   private ticket = {
     from: <User>{},
+    id: 0,
     action: '',
     status: 0,
     header: '',
@@ -103,6 +104,7 @@ export class MessageViewComponent implements OnInit {
         this.message = JSON.parse(JSON.stringify(d));
         console.log('===>', d);
 
+        this.ticket.id = this.messageID;
         [this.ticket.from.firstName, this.ticket.from.lastName] = (this.message as any).from.split(' ');
         this.ticket.from.title = (this.message as any).title;
         this.ticket.from.email = '';

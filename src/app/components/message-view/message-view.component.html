@@ -1,5 +1,6 @@
 <form id='id_ticketForm' #ticketForm='ngForm' (ngSubmit)='submitTicket(ticketForm)'>
 <section
+  *ngIf='ticket'
   fxLayout='row wrap'
   fxLayoutAlign='space-evenly'>
 
@@ -39,6 +40,16 @@
 
     </p-panel>
     <br />
+
+    <p-panel>
+      <div class="p-grid">
+        <div class="p-col">1</div>
+        <div class="p-col">2</div>
+        <div class="p-col">3</div>
+      </div>
+    </p-panel>
+    <br />
+
     <p-panel>
       <p-header><b>NEW</b></p-header>
       <div fxLayout='column' fxLayoutAlign='start' style='margin-top:1em'>
