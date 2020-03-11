@@ -12,6 +12,7 @@ import { TableFooComponent } from './table-foo/table-foo.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestingComponent } from './testing/testing.component';
 import { MessagesListComponent } from './messages-list/messages-list.component';
+import { CommsComponent } from './components/comms/comms.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'testing', component: TestingComponent},
   { path: 'messages', component: MessagesListComponent },
+  { path: 'comms', component: CommsComponent },
   { path: '**', component: HomeComponent },
 ];
 

@@ -1,0 +1,22 @@
+<pre>{{msgIn}}</pre>
+<pre>{{currentSelection | json}}</pre>
+<p-table [value]='ticketsDS'
+  selectionMode='single' (onRowSelect)='selectTicket($event)'>
+  <ng-template pTemplate='header'>
+    <tr>
+      <th style='width:4em'>ID</th>
+      <th>Name</th>
+      <th>Hero Name</th>
+      <th style='width:6em'>Power</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate='body' let-d>
+    <tr [pSelectableRow]='d'>
+      <td>{{d.id}}</td>
+      <td>{{d.subject}}</td>
+      <td>{{d.dateCreated}}</td>
+      <td>{{d.status}}</td>
+    </tr>
+  </ng-template>
+
+</p-table>

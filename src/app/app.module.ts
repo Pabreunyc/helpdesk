@@ -21,7 +21,7 @@ import { ButtonModule } from 'primeng/button';
 import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatDialogModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatDialogModule, MatSelectModule } from '@angular/material';
 import { MatPaginatorModule, MatProgressSpinnerModule, MatSortModule, MatTableModule } from '@angular/material';
 import { MatGridListModule, MatCardModule, MatMenuModule } from '@angular/material';
 import { MatDividerModule } from '@angular/material';
@@ -45,6 +45,9 @@ import { ChooseUserComponent } from './components/choose-user/choose-user.compon
 import { MessagesService } from './_services/messages.service';
 import { UserService } from './_services/user.service';
 import { HasRoleDirective } from './_directives/has-role.directive';
+import { CommsComponent } from './components/comms/comms.component';
+import { ParentComponent } from './components/comms/parent/parent.component';
+import { Child1Component } from './components/comms/child1/child1.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,10 @@ import { HasRoleDirective } from './_directives/has-role.directive';
     MessageViewComponent,
     MessageListComponent,
     ChooseUserComponent,
-    HasRoleDirective
+    HasRoleDirective,
+    CommsComponent,
+    ParentComponent,
+    Child1Component
   ],
   imports: [
     BrowserModule,
@@ -71,6 +77,7 @@ import { HasRoleDirective } from './_directives/has-role.directive';
     MatSidenavModule,
     FormsModule,
     MatInputModule,
+    MatSelectModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
