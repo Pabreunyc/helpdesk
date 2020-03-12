@@ -43,6 +43,10 @@ public gooRequest = new EventEmitter<number>();
     //this.commsService.setCurrentTicket(ticket.id);
     this.commsService.emit(new CustomEvent('selectTicket', {detail: evt.data.id}));
   }
+  unselectRow(evt) {
+    console.log('Child1Component.unSelectRow', evt);
+    this.commsService.emit(new CustomEvent('unselectTicket', {detail: null}));
+  }
 
   clickMe(evt) {
     console.log('ClickMe', evt);

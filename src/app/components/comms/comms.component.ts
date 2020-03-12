@@ -72,25 +72,31 @@ public ticket:  HelpdeskTicket;
   showTicket(evt) {
     let id = evt.detail;
     console.log('CommsComponent.showTicket', id);
-    console.log(this);
-    let data = this.commsService.getTicket(id);
-    console.log('CommsComponent.showTicket', data);
 
-    this.commsService.getTicket(id)
-      .subscribe(
-        d => {
-          console.log(d);
-          data = d;
-          this.selected.productId   = data.productId;
-          this.selected.categoryId  = data.categoryId;
-          this.selected.priorityId  = data.priorityId;
-          this.ticket = data;
-        });
+    this.ticket = resetTicket();
+    this.selected = { productId:null, categoryId:null, priorityId:null };
 
-    self.selected.productId   = data.productId;
-    self.selected.categoryId  = data.categoryId;
-    self.selected.priorityId  = data.priorityId;
+    if(id) {
+      //console.log(this);
+      this.ticket = resetTicket();
+      let data = this.commsService.getTicket(id);
+      console.log('CommsComponent.showTicket', data);
 
+      this.commsService.getTicket(id)
+        .subscribe(
+          d => {
+            console.log(d);
+            data = d;
+            this.selected.productId   = data.productId;
+            this.selected.categoryId  = data.categoryId;
+            this.selected.priorityId  = data.priorityId;
+            this.ticket = data;
+          });
+
+      self.selected.productId   = data.productId;
+      self.selected.categoryId  = data.categoryId;
+      self.selected.priorityId  = data.priorityId;
+    }
   }
 
   Goo(id) {
