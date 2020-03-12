@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, Subject, BehaviorSubject, timer, of, from, Subscription } from 'rxjs';
-import { map, tap, delay, find, share, filter } from 'rxjs/operators';
+import { map, tap, delay, find, filter, share, toArray } from 'rxjs/operators';
 
 import { HelpdeskTicket } from '../_models/helpdesk_ticket';
+import { EventEmitter } from 'events';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,75 +17,72 @@ private tableData = [
   {id:400, name:'Ben Grimm', title:'The Thing', power:9200 }
 ];
 
-private TICKET_STORE = 'tickets'
-private _ticketList: BehaviorSubject<HelpdeskTicket[]>;
-private _selectedTicket$: Subject<HelpdeskTicket> = new Subject();
+private TICKET_STORE = 'tickets';
+private ticketList;
+private _ticketList: BehaviorSubject<[]>;
+public _selectedTicket$: Subject<CustomEvent> = new Subject();
 
   constructor() {
     console.log('CommsService.constructor');
-    let t = <HelpdeskTicket[]>JSON.parse(sessionStorage.getItem(this.TICKET_STORE));
-    this._ticketList = new BehaviorSubject(t);
-    console.table(t);
+
+    this.ticketList = JSON.parse(localStorage.getItem(this.TICKET_STORE)) || [];
+    this._ticketList = new BehaviorSubject(this.ticketList);
+    console.table(this.ticketList);
   }
 
-  getTicketList() {
+  getTicketList():Observable<HelpdeskTicket[]> {
     return this._ticketList.asObservable().pipe(delay(1000));
   }
-  getTicket(id) {
-    let ret: HelpdeskTicket[];
 
+  // ==========================================================================
+  getTicket(id):any {
     console.log('CommsService.getTicket', id);
-    this._ticketList.subscribe((v) => {
-      console.log(v);
-      ret = v.filter(x => {
-        console.log('::', id, x);
-        x.id === id;
-      });
-      console.log('ret', ret);
-    });
 
+    let ticket = this.ticketList.find(t => t.id === id);
+    ticket = ticket ? ticket : null;
+
+    console.log('list', this.ticketList, ticket);
+    return of(ticket).pipe(delay(1000));
   }
+
+  findTicket(list, id) {
+    console.log('findTicket', list, id);
+
+    let r = list.filter(v => v.id === id);
+    console.log(r);
+  }
+
   saveTickets(ticket) {
     console.log('Saving Ticket', ticket);
     let maxId = 1;
-    let t = JSON.parse(sessionStorage.getItem(this.TICKET_STORE)) || [];
+    // let t = JSON.parse(localStorage.getItem(this.TICKET_STORE)) || [];
 
-    for(let i=0; i<t.length; i++) {
-      maxId = Math.max(t[i].id, maxId);
+    for(let i=0; i<this.ticketList.length; i++) {
+      maxId = Math.max(this.ticketList[i].id, maxId);
     }
     ticket.id = ++maxId;
-    t.push(ticket);
-    sessionStorage.setItem(this.TICKET_STORE, JSON.stringify(t));
+    this.ticketList.push(ticket);
+    localStorage.setItem(this.TICKET_STORE, JSON.stringify(this.ticketList));
 
-    this._ticketList.next(t);
-    return true;
+    this._ticketList.next(this.ticketList);
+    // return true;
   }
 
-  emit(evt) {
-    console.log('CommsService.emit', evt);
-    this._selectedTicket$.next(evt);
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  emit(evt: CustomEvent) {
+    console.log('CommsService.emitIn', evt);
+    let e = new CustomEvent('selectTicket', {detail: evt.detail});
+    console.log('emitting', e);
+    this._selectedTicket$.next(e);
   }
   on(eventName: string, action: any): Subscription {
     console.log('CommsService.on', eventName, action);
     return this._selectedTicket$.subscribe(action);
   }
+
   setCurrentTicket(ticketID) {
     console.log('CommsService.currentTicket', ticketID);
-    this.emit({name:'Major', data:ticketID});
+    // this.emit({name:'Major', data:ticketID});
   }
   // --------------------------------------------------------------------------
-  getAllHeroes() {
-    let tickets: HelpdeskTicket[];
-
-    console.log('CommsService.getAllHeroes');
-    return JSON.parse(localStorage.getItem('heroes'));
-  }
-
-  getHero(id) {
-    console.log('CommsService.getHero', id);
-    let m = this.tableData.filter(i => i.id==id);
-    console.log('getHero',id, m);
-
-    return m[0];
-  }
 }

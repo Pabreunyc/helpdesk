@@ -1,9 +1,7 @@
 <div class='p-grid'>
 
   <div class='p-col-5 c-column'>
-    <app-child1
-    [msgIn]='toOut'
-    (msgOut)='getDetails($event)'>
+    <app-child1 (gooRequest)='gooFunc($event)'>
     </app-child1>
   </div> <!-- CHILDREN-->
 
@@ -11,13 +9,17 @@
   <div class='p-col-5 c-column'>
     <div class='p-grid'>
       <div class='p-col'>
+        {{selected | json}}
+      </div>
+      <div class='p-col'>
+        <button type='button' mat-button-outline (click)='Goo("priorityId")'>Outline</button>
       </div>
     </div>
     <div class='p-grid'>
       <div class='p-col'>
         <mat-form-field appearance='fill'>
           <mat-label>Product</mat-label>
-          <mat-select [(value)]="selected.product">
+          <mat-select [(value)]="selected.productId">
             <mat-option>None</mat-option>
             <mat-option value="product1">Product 1</mat-option>
             <mat-option value="product2">Product 2</mat-option>
@@ -28,7 +30,7 @@
       <div class='p-col'>
         <mat-form-field  appearance='legacy'>
           <mat-label>Category</mat-label>
-          <mat-select [(value)]="selected.category">
+          <mat-select [(value)]="selected.categoryId">
             <mat-option>None</mat-option>
             <mat-option value="category1">Category 1</mat-option>
             <mat-option value="category2">Category 2</mat-option>
@@ -39,7 +41,7 @@
       <div class='p-col'>
         <mat-form-field appearance='outline'>
           <mat-label>Priority</mat-label>
-          <mat-select [(value)]="selected.priority">
+          <mat-select [(value)]="selected.priorityId">
             <mat-option>None</mat-option>
             <mat-option value="priority1">Priority 1</mat-option>
             <mat-option value="priority2">Priority 2</mat-option>

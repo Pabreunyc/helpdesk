@@ -1,5 +1,6 @@
 <pre>{{msgIn}}</pre>
 <pre>{{currentSelection | json}}</pre>
+<div><button matButton (click)='clickMe($event)'>Click Me!</button></div>
 <p-table [value]='ticketsDS'
   selectionMode='single' (onRowSelect)='selectTicket($event)'>
   <ng-template pTemplate='header'>

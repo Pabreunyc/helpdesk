@@ -3,6 +3,8 @@ import { Component, OnInit, OnDestroy, Input, Output } from '@angular/core';
 import { HelpdeskTicket } from '../../_models/helpdesk_ticket';
 import { CommsService } from '../../_services/comms.service';
 
+let self; // hack
+
 @Component({
   selector: 'app-comms',
   templateUrl: './comms.component.html',
@@ -11,30 +13,37 @@ import { CommsService } from '../../_services/comms.service';
 export class CommsComponent implements OnInit {
 private action = 'new';
 private selectedHero;
-private selected = { product:null, category:null, priority:null };
-private dateSubmitted;
-public toOut: number;
+
+public dateSubmitted;
+public selected = { productId:null, categoryId:null, priorityId:null };
 public ticket:  HelpdeskTicket;
-public ticketList: HelpdeskTicket[];
 
   constructor( private commsService: CommsService) {
     console.log('CommsComponent.constructor');
-    console.log('>>', (this.toOut = Math.random()));
     this.ticket = resetTicket();
-    this.ticketList = [];
+    self = this;
   }
 
   ngOnInit() {
     console.log('CommsComponent.onInit');
-    this.ticket.id = 666;
+    //this.ticket.id = 666;
     this.ticket.creatorId = 4;
     this.ticket.title = 'Invisible Woman';
     this.ticket.department = 'FF';
     this.ticket.phone = '(212)444-4442';
 
-    this.commsService.on('Major', this.showTicket);
+    console.log(this, self);
+    // SUBSCRIPTION ------------------------------------------
+    let r = this.commsService.on('Major', evt => this.showTicket(evt));
+    console.log('subscription', r);
   }
+  ngOnDestroy() {
+    console.log('CommsComponent.DESTROY');
 
+  }
+  gooFunc(evt) {
+    console.log('goo', evt);
+  }
   getDetails(evt) {
     console.log('getDetails', evt);
     this.selectedHero = this.commsService.getHero(evt);
@@ -50,18 +59,47 @@ public ticketList: HelpdeskTicket[];
     this.ticket.status = 'open';
     this.ticket.dateCreated = new Date().toString();
 
-    this.ticket.productId = this.selected.product;
-    this.ticket.categoryId = this.selected.category;
-    this.ticket.priorityId = this.selected.priority;
+    this.ticket.productId = this.selected.productId;
+    this.ticket.categoryId = this.selected.categoryId;
+    this.ticket.priorityId = this.selected.priorityId;
 
     this.commsService.saveTickets(this.ticket);
 
-    this.selected = { product:null, category:null, priority:null };
     this.ticket = resetTicket();
+    this.selected = { productId:null, categoryId:null, priorityId:null };
   }
 
-  showTicket(id) {
-    console.log('FOO', id);
+  showTicket(evt) {
+    let id = evt.detail;
+    console.log('CommsComponent.showTicket', id);
+    console.log(this);
+    let data = this.commsService.getTicket(id);
+    console.log('CommsComponent.showTicket', data);
+
+    this.commsService.getTicket(id)
+      .subscribe(
+        d => {
+          console.log(d);
+          data = d;
+          this.selected.productId   = data.productId;
+          this.selected.categoryId  = data.categoryId;
+          this.selected.priorityId  = data.priorityId;
+          this.ticket = data;
+        });
+
+    self.selected.productId   = data.productId;
+    self.selected.categoryId  = data.categoryId;
+    self.selected.priorityId  = data.priorityId;
+
+  }
+
+  Goo(id) {
+    console.log('goo.1', id, this.selected[id]);
+    if(this.selected[id] === null) return true;
+    let v = this.selected[id].slice(0, this.selected[id].length - 1);
+    let n = this.selected[id].slice(this.selected[id].length - 1);
+    let x = this.selected[id] = v + (((n + 1) % 3) + 1);
+    console.log('goo.2', x);
   }
 
 }

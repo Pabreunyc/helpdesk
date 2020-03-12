@@ -7,7 +7,7 @@ export class HelpdeskTicket {
   subject: string;
   description: string;
   dateCreated: string;
-  status: string; // 'open', 'read','ckose
+  status: string; // 'open', 'read', 'closed'
   productId: number;
   categoryId: number;
   priorityId: number;
@@ -26,7 +26,8 @@ export class HelpdeskComment {
 export class HelpdeskAttachment {
   id: number;
   commentId: number;
-  filename: '';
-  filesize: 0;
-  filestpe: null;
+  filename: string;
+  filepath: string;
+  filesize: number;
+  filetype: string;
 }
