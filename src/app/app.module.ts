@@ -48,6 +48,7 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { CommsComponent } from './components/comms/comms.component';
 import { ParentComponent } from './components/comms/parent/parent.component';
 import { Child1Component } from './components/comms/child1/child1.component';
+import { Child2Component } from './components/comms/child2/child2.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { Child1Component } from './components/comms/child1/child1.component';
     HasRoleDirective,
     CommsComponent,
     ParentComponent,
-    Child1Component
+    Child1Component,
+    Child2Component
   ],
   imports: [
     BrowserModule,

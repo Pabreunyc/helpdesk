@@ -12,8 +12,9 @@ import { TableFooComponent } from './table-foo/table-foo.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestingComponent } from './testing/testing.component';
 import { MessagesListComponent } from './messages-list/messages-list.component';
-import { CommsComponent } from './components/comms/comms.component';
 
+import { CommsComponent } from './components/comms/comms.component';
+import { ParentComponent } from './components/comms/parent/parent.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/choose', pathMatch: 'full' },
@@ -36,6 +37,8 @@ const routes: Routes = [
   { path: 'testing', component: TestingComponent},
   { path: 'messages', component: MessagesListComponent },
   { path: 'comms', component: CommsComponent },
+  { path: 'commsp', component: ParentComponent },
+
   { path: '**', component: HomeComponent },
 ];
 

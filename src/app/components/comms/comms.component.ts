@@ -50,20 +50,29 @@ public ticket:  HelpdeskTicket;
     console.log('&&&', this.selectedHero);
   }
 
+  newTicket(d) {
+    console.log('CommsComponent.newTicket');
+
+    this.ticket = resetTicket();
+    this.selected = { productId:null, categoryId:null, priorityId:null };
+  }
+
   submitForm(d) {
-    //  submit
     console.log('submitForm', this.ticket, this.selected);
 
-
-    //this.ticket.id = counter;
+    let action = 'new';
     this.ticket.status = 'open';
-    this.ticket.dateCreated = new Date().toString();
+    // new ticket
+    if(this.ticket.id === 0) {
+      this.ticket.dateCreated = new Date().toString();
+    } else {
+      action = 'update';
+    }
 
     this.ticket.productId = this.selected.productId;
     this.ticket.categoryId = this.selected.categoryId;
     this.ticket.priorityId = this.selected.priorityId;
-
-    this.commsService.saveTickets(this.ticket);
+    this.commsService.saveTickets({ action:action, ticket:this.ticket });
 
     this.ticket = resetTicket();
     this.selected = { productId:null, categoryId:null, priorityId:null };

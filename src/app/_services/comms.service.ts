@@ -19,19 +19,20 @@ private tableData = [
 
 private TICKET_STORE = 'tickets';
 private ticketList;
-private _ticketList: BehaviorSubject<[]>;
+private _ticketList$: BehaviorSubject<[any]>;
 public _selectedTicket$: Subject<CustomEvent> = new Subject();
 
   constructor() {
     console.log('CommsService.constructor');
 
     this.ticketList = JSON.parse(localStorage.getItem(this.TICKET_STORE)) || [];
-    this._ticketList = new BehaviorSubject(this.ticketList);
+    this._ticketList$ = new BehaviorSubject(this.ticketList);
+
     console.table(this.ticketList);
   }
 
   getTicketList():Observable<HelpdeskTicket[]> {
-    return this._ticketList.asObservable().pipe(delay(1000));
+    return this._ticketList$.asObservable().pipe(delay(500));
   }
 
   // ==========================================================================
@@ -42,29 +43,36 @@ public _selectedTicket$: Subject<CustomEvent> = new Subject();
     ticket = ticket ? ticket : null;
 
     console.log('list', this.ticketList, ticket);
-    return of(ticket).pipe(delay(1000));
+    return of(ticket).pipe(delay(500));
   }
 
-  findTicket(list, id) {
-    console.log('findTicket', list, id);
-
-    let r = list.filter(v => v.id === id);
-    console.log(r);
-  }
-
-  saveTickets(ticket) {
-    console.log('Saving Ticket', ticket);
-    let maxId = 1;
+  saveTickets(data) {
+    console.log('Saving Ticket', data);
     // let t = JSON.parse(localStorage.getItem(this.TICKET_STORE)) || [];
+    let ticket = data.ticket;
 
-    for(let i=0; i<this.ticketList.length; i++) {
-      maxId = Math.max(this.ticketList[i].id, maxId);
+    if(data.action == 'new') {
+      let maxId = 1;
+      for(let i=0; i<this.ticketList.length; i++) {
+        maxId = Math.max(this.ticketList[i].id, maxId);
+      }
+      ticket.id = ++maxId;
+      this.ticketList.push(ticket);
+    } else {
+      let ndx = 0;
+      for(let i=0; i<this.ticketList.length; i++) {
+        if(this.ticketList[i].id === ticket.id) {
+          ndx = i;
+          break
+        }
+      }
+      console.log('updating ticket:', ndx);
+      this.ticketList[ndx] = data.ticket;
     }
-    ticket.id = ++maxId;
-    this.ticketList.push(ticket);
+
     localStorage.setItem(this.TICKET_STORE, JSON.stringify(this.ticketList));
 
-    this._ticketList.next(this.ticketList);
+    this._ticketList$.next(this.ticketList);
     // return true;
   }
 

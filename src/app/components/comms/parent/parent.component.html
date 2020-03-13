@@ -1,3 +1,11 @@
-<p>
-  parent works!
-</p>
+<h5>{{title}}</h5>
+<div>
+  -- {{max}} --
+  <ul>
+    <li *ngFor="let i of list"><button mat-raised-button (click)="buttonClick(i)">No. {{i}}</button>
+  </ul>
+</div>
+
+<hr />
+
+<app-child2 [max]='max'></app-child2>
