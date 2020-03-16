@@ -1,6 +1,6 @@
-<h5>{{title}}</h5>
+<h5>Title: {{title}}</h5>
+<h4>maxp: {{maxp}}</h4>
 <div>
-  -- {{max}} --
   <ul>
     <li *ngFor="let i of list"><button mat-raised-button (click)="buttonClick(i)">No. {{i}}</button>
   </ul>
@@ -8,4 +8,4 @@
 
 <hr />
 
-<app-child2 [max]='max'></app-child2>
+<app-child2 [maxc]='maxp'></app-child2>

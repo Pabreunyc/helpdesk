@@ -44,11 +44,6 @@ public ticket:  HelpdeskTicket;
   gooFunc(evt) {
     console.log('goo', evt);
   }
-  getDetails(evt) {
-    console.log('getDetails', evt);
-    this.selectedHero = this.commsService.getHero(evt);
-    console.log('&&&', this.selectedHero);
-  }
 
   newTicket(d) {
     console.log('CommsComponent.newTicket');

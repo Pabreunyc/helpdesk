@@ -7,13 +7,15 @@ import { Component, OnInit,  OnDestroy } from '@angular/core';
 })
 export class ParentComponent implements OnInit {
 public title = 'Parent';
-public max:number = 5;
-private list:number[];
+public maxp: number;
+private list: number[];
 
   constructor() {
     console.log('ParentComponent.construcor');
+    // this.maxp = Math.random();
+    this.maxp = 5;
     this.list = [];
-    for(let i=0; i < this.max; i++) {
+    for(let i=0; i < this.maxp; i++) {
       this.list.push(i+100);
     }
     console.log('>>>', this.list);

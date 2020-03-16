@@ -30,7 +30,7 @@ public gooRequest = new EventEmitter<number>();
   }
 
   ngOnInit() {
-    console.log('Child1Component.onInit');PA
+    console.log('Child1Component.onInit');
     // console.log(this.commsService.getTicketList().subscribe( v => console.log(v)));
   }
   ngOnDestroy() {
