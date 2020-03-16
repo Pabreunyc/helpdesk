@@ -1,7 +1,2 @@
-<p>
-  child2 works!
-</p>
-
-<button mat-raised-button (click)='fireEvent($event)' [color]='accent'>Button!</button>
-
-<div style='border:1px solid sandybrown; width:100px; height:100px'>DIV</div>
+<input pInputText type='number' [(ngModel)]='newStock'>
+<p-button label='Update' class="ui-button-rounded" styleClass="{{buttonColor}}" (click)='updateStock()'></p-button>

@@ -1,31 +1,49 @@
-import { Component, OnInit,  OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.css']
 })
-export class ParentComponent implements OnInit {
+export class ParentComponent implements OnInit, OnChanges {
 public title = 'Parent';
-public maxp: number;
-private list: number[];
+public selectedRow: any;
+private products = [];
 
   constructor() {
     console.log('ParentComponent.construcor');
-    // this.maxp = Math.random();
-    this.maxp = 5;
-    this.list = [];
-    for(let i=0; i < this.maxp; i++) {
-      this.list.push(i+100);
-    }
-    console.log('>>>', this.list);
   }
 
   ngOnInit() {
-
+    console.log('ParentComponent.onInit');
+    this.products = this.getProducts();
+  }
+  ngOnChanges(e) {
+    console.log('ParentComponent.onChanges', e);
   }
 
-  buttonClick(n) {
-    console.log('ParentComponent.buttonClick', n);
+  clickRow(d) {
+    console.log('ParentComponent.clickRow', d);
+    this.selectedRow = d;
+  }
+
+  updateStock(evt) {
+    console.log('ParentComponent.updateStock', evt);
+    let id = evt.product.id;
+    if(parseInt(evt.newStock)) {
+      let prod;
+      prod = this.products.find( e => e.id == id);
+      console.log(id, prod);
+      prod.stock = evt.newStock;
+    }
+  }
+  getProducts() {
+    return [
+        { 'id': '1', 'title': 'Screw Driver', 'price': 400, 'stock': 11 },
+        { 'id': '2', 'title': 'Nut Volt', 'price': 200, 'stock': 5 },
+        { 'id': '3', 'title': 'Resistor', 'price': 78, 'stock': 45 },
+        { 'id': '4', 'title': 'Tractor', 'price': 20000, 'stock': 1 },
+        { 'id': '5', 'title': 'Roller', 'price': 62, 'stock': 15 },
+    ];
   }
 }

@@ -1,11 +1,25 @@
-<h5>Title: {{title}}</h5>
-<h4>maxp: {{maxp}}</h4>
-<div>
-  <ul>
-    <li *ngFor="let i of list"><button mat-raised-button (click)="buttonClick(i)">No. {{i}}</button>
-  </ul>
-</div>
+<table class="table">
+  <thead>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Price</th>
+    <th>Stock</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of products" (click)='clickRow(p)'>
+        <td>{{p.id}}</td>
+        <td>{{p.title}}</td>
+        <td>{{p.price}}</td>
+        <td>{{p.stock}}</td>
+        <td style="width:20em">
+          <app-child2
+            (stockChange)='updateStock($event)'
+            [product]='p'>
+          </app-child2>
+        </td>
+    </tr>
+  </tbody>
+</table>
 
-<hr />
-
-<app-child2 [maxc]='maxp'></app-child2>
+<app-child3 [inner]='selectedRow'></app-child3>

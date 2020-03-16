@@ -49,6 +49,7 @@ import { CommsComponent } from './components/comms/comms.component';
 import { ParentComponent } from './components/comms/parent/parent.component';
 import { Child1Component } from './components/comms/child1/child1.component';
 import { Child2Component } from './components/comms/child2/child2.component';
+import { Child3Component } from './components/comms/child3/child3.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { Child2Component } from './components/comms/child2/child2.component';
     CommsComponent,
     ParentComponent,
     Child1Component,
-    Child2Component
+    Child2Component,
+    Child3Component
   ],
   imports: [
     BrowserModule,
