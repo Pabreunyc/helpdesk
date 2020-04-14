@@ -11,9 +11,9 @@ import { TableFooDataSource, TableFooItem } from './table-foo-datasource';
   styleUrls: ['./table-foo.component.css']
 })
 export class TableFooComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<TableFooItem>;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatTable, { static: true }) table: MatTable<TableFooItem>;
   dataSource: TableFooDataSource;
   selection: TableFooItem;
 
